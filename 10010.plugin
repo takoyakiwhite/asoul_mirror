@@ -1,13 +1,13 @@
-#!name=中国联通 VoWiFi 白名单绕过
-#!desc=拦截联通接口并替换返回值 0211 -> 0000
-#!author=takoyakiwhite + ChatGPT
+#!name=联通 WhitePhone 响应修改
+#!desc=拦截联通特定接口并修改响应体数据，解决相关白屏或校验问题。
+#!author=takoyakiwhite
 #!homepage=https://github.com/takoyakiwhite/asoul_mirror
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Unicom.png
+
+[Script]
+# 拦截指定 URL，获取响应体并交由远程 JS 处理
+http-response ^https:\/\/m\.client\.10010\.com\/edopi.*kOfficialWhitePhone script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010.js, requires-body=true, timeout=10, tag=whitephone_fix
 
 [MITM]
+# 开启对应域名的 HTTPS 解密
 hostname = m.client.10010.com
-
-[Rewrite]
-^https:\/\/m\.client\.10010\.com\/edopi.*kOfficialWhitePhone url script-response-body whitephone_fix
-
-[Remote Script]
-https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010.js, tag=whitephone_fix, enabled=true
