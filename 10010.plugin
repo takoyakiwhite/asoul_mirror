@@ -4,7 +4,7 @@
 
 [Script]
 # 拦截指定 URL，获取响应体并交由远程 JS 处理
-http-response ^https:\/\/m\.client\.10010\.com\/edopi.*kOfficialWhitePhone script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010.js, requires-body=true, timeout=10, tag=whitephone_fix
+http-response ^https:\/\/m\.client\.10010\.com\/edopinterface\/officialWhite\/checkOfficialWhitePhone(\?.*)?$ script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010.js, requires-body=true, timeout=10, tag=whitephone_fix
 
 [MITM]
 # 开启对应域名的 HTTPS 解密
