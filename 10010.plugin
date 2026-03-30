@@ -2,11 +2,10 @@
 #!desc=拦截联通官方白名单接口并修改响应体：0211 -> 0000
 #!author=takoyakiwhite
 
+[Script]
+# 拦截指定 URL，获取响应体并交由远程 JS 处理
+http-response ^https:\/\/m\.client\.10010\.com\/edopi.*kOfficialWhitePhone script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010.js, requires-body=true, timeout=10, tag=whitephone_fix
+
 [MITM]
+# 开启对应域名的 HTTPS 解密
 hostname = m.client.10010.com
-
-[Rewrite]
-^https:\/\/m\.client\.10010\.com\/edopi.*kOfficialWhitePhone url script-response-body whitephone_fix
-
-[Remote Script]
-https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010.js, tag=whitephone_fix, enabled=true
