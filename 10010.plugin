@@ -1,6 +1,7 @@
 #!name=中国联通 WiFi 通话白名单绕过
 #!desc=拦截联通官方白名单接口并修改响应体：0211 -> 0000
 #!author=takoyakiwhite
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Unicom.png
 
 [MITM]
 hostname = m.client.10010.com
