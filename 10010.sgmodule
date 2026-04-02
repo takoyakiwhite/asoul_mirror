@@ -1,0 +1,9 @@
+#!name=中国联通 WiFi 通话白名单绕过
+#!desc=拦截联通官方白名单接口并修改响应体：0211 -> 0000
+#!author=takoyakiwhite
+
+[Script]
+whitephone_fix = type=http-response, pattern=^https:\/\/m\.client\.10010\.com\/edopinterface\/officialWhite\/checkOfficialWhitePhone(\?.*)?$, requires-body=1, max-size=0, timeout=10, script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/10010_surge.js
+
+[MITM]
+hostname = m.client.10010.com
