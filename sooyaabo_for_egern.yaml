@@ -1,0 +1,13 @@
+name: LoonLab 插件跳转 Egern
+description: 将 LoonLab 插件安装链接自动转换为 Egern 模块导入格式
+homepage: https://loonlab.103516.xyz/Plugin/
+dns: {}
+body_rewrites:
+- response_regex:
+    match: https://loonlab\.103516\.xyz/Plugin/
+    find: loon://import\?plugin=
+    replace: egern:///modules/new?url=
+mitm:
+  hostnames:
+    includes:
+    - loonlab.103516.xyz
