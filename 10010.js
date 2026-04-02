@@ -1,35 +1,40 @@
 try {
     let body = $response.body;
+    let headers = $response.headers;
 
-    // Debug: 原始 body 长度
-    $console.log("Body length: " + (body ? body.length : "null"));
+    $console.log("=== whitephone debug ===");
+    $console.log("Headers: " + JSON.stringify(headers));
+
+    // 👉 兼容 binary / ArrayBuffer
+    if (body instanceof ArrayBuffer) {
+        $console.log("ArrayBuffer → decoding");
+        body = new TextDecoder("utf-8").decode(body);
+    }
 
     if (!body) {
-        $console.log("Body is empty");
+        $console.log("Empty body");
         return $done({});
     }
 
-    // Debug: 是否命中关键字
+    if (typeof body !== "string") {
+        $console.log("Not string body: " + typeof body);
+        return $done({});
+    }
+
     if (!body.includes("0211")) {
-        $console.log("Keyword 0211 not found");
+        $console.log("0211 not found");
         return $done({});
     }
-
-    $console.log("Keyword found, replacing...");
 
     let newBody = body.replace(/0211/g, "0000");
 
-    // Debug: 替换前后对比（截取一部分避免太长）
-    $console.log("Before: " + body.slice(0, 100));
-    $console.log("After: " + newBody.slice(0, 100));
-
-    // 可选：弹通知（调试用）
-    $notify("Script Debug", "Replace Success", "0211 → 0000");
+    $console.log("Replace success");
+    $notify("联通白名单绕过", "成功", "0211 → 0000");
 
     $done({ body: newBody });
 
 } catch (e) {
-    $console.log("Error: " + e);
+    $console.log("ERROR: " + e);
     $notify("Script Error", "", String(e));
     $done({});
 }
