@@ -1,12 +1,9 @@
 #!name=兼容 rucu6 制作的模块
 #!desc=将访问 rucu6.pages.dev 时的 User-Agent 修改为 Loon
-
 #!author=ChatGPT
 
 [Header Rewrite]
-
 http-request ^https://rucu6\.pages\.dev(/.*)?$ header-replace User-Agent Loon
 
 [MITM]
-
-hostname = rucu6.pages.dev
+hostname = %APPEND% rucu6.pages.dev
