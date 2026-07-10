@@ -6,6 +6,4 @@
 http-response-jq ^https:\/\/m\.client\.10010\.com\/edopinterface\/officialWhite\/checkOfficialWhitePhone '.response.head.respCode = "0000" | .response.head.respMsg = "Success" | .response.body = {}'
 
 [MITM]
-tcp-connection = true
-h2 = true
-hostname = m.client.10010.com
+hostname = %APPEND% m.client.10010.com
