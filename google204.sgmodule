@@ -1,8 +1,9 @@
-#!name=Google Generate_204 返回 200
-#!desc=仅将 clients3.google.com/generate_204 强制返回 HTTP 200
+#!name=Google Generate_204 本地返回204
+#!desc=本地拦截 clients3.google.com/generate_204 并返回 HTTP 204
 
-[Map Local]
-^https?:\/\/clients3\.google\.com\/generate_204(?:\?.*)?$ data-type=text data=" " status-code=200
+[Script]
+GoogleGenerate204 = type=http-request, pattern=^https?:\/\/clients3\.google\.com\/generate_204(?:\?.*)?$, script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/google204.js
 
 [MITM]
 hostname = %APPEND% clients3.google.com
+
