@@ -1,7 +1,0 @@
-#!name=t.me 指定 IP
-#!desc=将 t.me 解析到指定 IPv4/IPv6
-#!author=ChatGPT
-#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1043.png
-
-[Host]
-t.me = 149.154.167.99, 2001:67c:4e8:f004::9
