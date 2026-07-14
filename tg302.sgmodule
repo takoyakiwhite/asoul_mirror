@@ -1,9 +1,0 @@
-#!name=t.me → telegram.me
-#!desc=将 t.me 链接重定向到 telegram.me
-#!author=ChatGPT
-
-[URL Rewrite]
-^https?:\/\/t\.me\/(.*) https://telegram.me/$1 302
-
-[MITM]
-hostname = %APPEND% t.me
