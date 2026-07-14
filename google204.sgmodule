@@ -1,0 +1,8 @@
+#!name=Google Generate_204 返回 200
+#!desc=仅将 clients3.google.com/generate_204 强制返回 HTTP 200
+
+[Map Local]
+^https?:\/\/clients3\.google\.com\/generate_204(?:\?.*)?$ data-type=text data=" " status-code=200
+
+[MITM]
+hostname = %APPEND% clients3.google.com
