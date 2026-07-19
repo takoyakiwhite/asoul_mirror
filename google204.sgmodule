@@ -1,9 +1,10 @@
-#!name=Google Generate_204 本地返回204
-#!desc=本地拦截 clients3.google.com/generate_204 并返回 HTTP 204
+#!name=Google Generate_204 转发
+#!desc=local
 
-[Script]
-GoogleGenerate204 = type=http-request, pattern=^https?:\/\/clients3\.google\.com\/generate_204(?:\?.*)?$, script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/google204.js
+[URL Rewrite]
+^https?:\/\/clients3\.google\.com\/generate_204(?:\?.*)?$ http://connectivitycheck.gstatic.com/generate_204 header
 
 [MITM]
 hostname = %APPEND% clients3.google.com
+
 
