@@ -1,4 +1,4 @@
-URL-REGEX,[?&]os=(mcdn|302kodo|302ppio|bcache)(&|$)
+URL-REGEX,[?&]os=(mcdn|302kodo|302ppio)(&|$)
 DOMAIN-SUFFIX,mcdn.bilivideo.net
 DOMAIN-KEYWORD,302ppio
 DOMAIN-KEYWORD,302kodo
