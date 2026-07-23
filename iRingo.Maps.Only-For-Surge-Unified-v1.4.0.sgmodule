@@ -1,0 +1,38 @@
+#!name =  iRingo: 🗺️ Maps （Only For Surge）
+#!desc = 为 Maps app添加国际版功能\n保持中国大陆地区地图功能正常\nBug fixed by ChatGPT 5.6 Sol\niOS26系统测试通过\n无需配置Boxjs\niOS27未测试，有问题请反馈
+#!author = VirgilClyne[https://github.com/VirgilClyne]&OpenAI[https://openai.com/zh-Hans-CN/]
+#!homepage = https://NSRingo.github.io/guide/GeoServices/maps
+#!icon = https://developer.apple.com/assets/elements/icons/maps/maps-128x128.png
+#!category =  iRingo
+#!date = 2026-07-23 16:30:00
+#!version = 1.4.0-unified-1.0.3
+#!arguments = GeoManifest.Dynamic.Config.CountryCode:"AUTO",UrlInfoSet.Dispatcher:"AutoNavi",UrlInfoSet.Directions:"AutoNavi",UrlInfoSet.RAP:"Apple",UrlInfoSet.LocationShift:"AutoNavi",TileSet.Earth:"AutoNavi",TileSet.Flyover:"XX",TileSet.Map:"CN",TileSet.Munin:"XX",TileSet.POI:"CN",TileSet.Roads:"XX",TileSet.Satellite:"HYBRID",TileSet.Traffic:"CN",Config.Announcements.Environment:"CN",Storage:"Argument",LogLevel:"WARN"
+#!arguments-desc = 这是固定的直接修复方案，无需也不提供 A/B 选择。AUTO 自动保留设备的 CN/国际清单分支；中国大陆使用高德底图、POI、实时交通、导航与 GCJ-02，国外使用 Apple 国际道路能力、地铁线、3D 卫星和四处看看。请保持 Storage=Argument，防止旧 BoxJs 参数覆盖模块。
+
+[Rule]
+# 中国大陆高德二维底图、交通、资源与导航服务必须直连。
+DOMAIN,gspe11-2-cn-ssl.ls.apple.com,DIRECT
+DOMAIN,gspe12-cn-ssl.ls.apple.com,DIRECT
+DOMAIN,gspe19-cn-ssl.ls.apple.com,DIRECT
+DOMAIN,gspe19-2-cn-ssl.ls.apple.com,DIRECT
+DOMAIN,gspe79-cn-ssl.ls.apple.com,DIRECT
+DOMAIN,gsp76-cn-ssl.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,is.autonavi.com,DIRECT
+
+[Script]
+# 只修改 GEO 功能开关与资源清单；不拦截天气、PEP、WeatherKit、导航、ETA、交通或语音响应。
+🗺️ DirectHybrid.config.defaults.response = type=http-response, pattern=^https?:\/\/configuration\.ls\.apple\.com\/config\/defaults, requires-body=1, engine=webview, script-path=iRingo.Maps.Direct-Adaptive-Hybrid-Look-Around-Fix-Surge-v1.4.0.response.js, argument=GeoManifest.Dynamic.Config.CountryCode="{{{GeoManifest.Dynamic.Config.CountryCode}}}"&UrlInfoSet.Dispatcher="{{{UrlInfoSet.Dispatcher}}}"&UrlInfoSet.Directions="{{{UrlInfoSet.Directions}}}"&UrlInfoSet.RAP="{{{UrlInfoSet.RAP}}}"&UrlInfoSet.LocationShift="{{{UrlInfoSet.LocationShift}}}"&TileSet.Earth="{{{TileSet.Earth}}}"&TileSet.Flyover="{{{TileSet.Flyover}}}"&TileSet.Map="{{{TileSet.Map}}}"&TileSet.Munin="{{{TileSet.Munin}}}"&TileSet.POI="{{{TileSet.POI}}}"&TileSet.Roads="{{{TileSet.Roads}}}"&TileSet.Satellite="{{{TileSet.Satellite}}}"&TileSet.Traffic="{{{TileSet.Traffic}}}"&Config.Announcements.Environment="{{{Config.Announcements.Environment}}}"&Storage="{{{Storage}}}"&LogLevel="{{{LogLevel}}}"
+
+# AUTO 保留系统 CN/非 CN 判断并预热另一份清单；同一份混合清单可在国内与国外视口间往返。
+🗺️ DirectHybrid.geo_manifest.request = type=http-request, pattern=^https?:\/\/gspe35-ssl\.ls\.apple\.(com|cn)\/geo_manifest\/dynamic\/config, script-path=iRingo.Maps.Direct-Adaptive-Hybrid-Look-Around-Fix-Surge-v1.4.0.request.js, argument=GeoManifest.Dynamic.Config.CountryCode="{{{GeoManifest.Dynamic.Config.CountryCode}}}"&UrlInfoSet.Dispatcher="{{{UrlInfoSet.Dispatcher}}}"&UrlInfoSet.Directions="{{{UrlInfoSet.Directions}}}"&UrlInfoSet.RAP="{{{UrlInfoSet.RAP}}}"&UrlInfoSet.LocationShift="{{{UrlInfoSet.LocationShift}}}"&TileSet.Earth="{{{TileSet.Earth}}}"&TileSet.Flyover="{{{TileSet.Flyover}}}"&TileSet.Map="{{{TileSet.Map}}}"&TileSet.Munin="{{{TileSet.Munin}}}"&TileSet.POI="{{{TileSet.POI}}}"&TileSet.Roads="{{{TileSet.Roads}}}"&TileSet.Satellite="{{{TileSet.Satellite}}}"&TileSet.Traffic="{{{TileSet.Traffic}}}"&Config.Announcements.Environment="{{{Config.Announcements.Environment}}}"&Storage="{{{Storage}}}"&LogLevel="{{{LogLevel}}}"
+🗺️ DirectHybrid.geo_manifest.response = type=http-response, pattern=^https?:\/\/gspe35-ssl\.ls\.apple\.(com|cn)\/geo_manifest\/dynamic\/config, requires-body=1, binary-body-mode=1, engine=webview, max-size=2097152, script-path=iRingo.Maps.Direct-Adaptive-Hybrid-Look-Around-Fix-Surge-v1.4.0.response.js, argument=GeoManifest.Dynamic.Config.CountryCode="{{{GeoManifest.Dynamic.Config.CountryCode}}}"&UrlInfoSet.Dispatcher="{{{UrlInfoSet.Dispatcher}}}"&UrlInfoSet.Directions="{{{UrlInfoSet.Directions}}}"&UrlInfoSet.RAP="{{{UrlInfoSet.RAP}}}"&UrlInfoSet.LocationShift="{{{UrlInfoSet.LocationShift}}}"&TileSet.Earth="{{{TileSet.Earth}}}"&TileSet.Flyover="{{{TileSet.Flyover}}}"&TileSet.Map="{{{TileSet.Map}}}"&TileSet.Munin="{{{TileSet.Munin}}}"&TileSet.POI="{{{TileSet.POI}}}"&TileSet.Roads="{{{TileSet.Roads}}}"&TileSet.Satellite="{{{TileSet.Satellite}}}"&TileSet.Traffic="{{{TileSet.Traffic}}}"&Config.Announcements.Environment="{{{Config.Announcements.Environment}}}"&Storage="{{{Storage}}}"&LogLevel="{{{LogLevel}}}"
+
+# 旁路观察地图自己发出的高德 style 1/20/22 请求，只保存当前版本与授权；不改请求。
+🧩 v1.4.0.CN.native-road-auth.observe = type=http-request, pattern=^https:\/\/gspe19(?:-2)?-cn-ssl\.ls\.apple\.com\/tiles(?:\?|$), requires-body=0, engine=jsc, timeout=3, script-path=iRingo.Maps.v1.4.0-China-Native-Road-Rewrite-Companion-Surge-v1.0.3.request.js
+
+# 仅中国大陆 z12-z15 的 Apple style 20 改投上述高德原生道路；国外及其他 style 原样透传。
+🧩 v1.4.0.CN.native-road.rewrite = type=http-request, pattern=^https:\/\/gspe19(?:-kittyhawk)?-ssl\.ls\.apple\.com\/tile\.vf(?:\?|$), requires-body=0, engine=jsc, timeout=3, script-path=iRingo.Maps.v1.4.0-China-Native-Road-Rewrite-Companion-Surge-v1.0.3.request.js
+
+[MITM]
+# v1.4.0 国际/混合能力主机与 v1.0.3 国内道路主机的原样并集。
+hostname = %APPEND% configuration.ls.apple.com, gspe35-ssl.ls.apple.com, gspe35-ssl.ls.apple.cn, gspe19-cn-ssl.ls.apple.com, gspe19-2-cn-ssl.ls.apple.com, gspe19-ssl.ls.apple.com, gspe19-kittyhawk-ssl.ls.apple.com
