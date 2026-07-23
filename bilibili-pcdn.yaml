@@ -13,5 +13,5 @@ domain_suffix_set:
   - ahdohpiechei.com
 
 url_regex_set:
-  - '[?&]os=mcdn(?:&|$)'
-  - '^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?\/v1\/resource\/'
+  - '(^|[?&])os=mcdn($|&)'
+  - '^https?://[0-9.]+(:[0-9]+)?/v1/resource/upgcxcode/.+\.m4s(\?.*)?$'
