@@ -1,10 +1,17 @@
-URL-REGEX,[?&]os=mcdn(?:&|$)
-URL-REGEX,^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?\/v1\/resource\/
-DOMAIN-KEYWORD,mcdn.bilivideo
-DOMAIN-KEYWORD,302ppio
-DOMAIN-KEYWORD,302kodo
-DOMAIN-SUFFIX,mountaintoys.cn
-DOMAIN-SUFFIX,szbdyd.com
-DOMAIN-SUFFIX,nexusedgeio.com
-DOMAIN-SUFFIX,ahdohpiechei.com
-DOMAIN,upos-sz-mirror14b.bilivideo.com
+domain_set:
+  - upos-sz-mirror14b.bilivideo.com
+
+domain_keyword_set:
+  - mcdn.bilivideo
+  - 302ppio
+  - 302kodo
+
+domain_suffix_set:
+  - mountaintoys.cn
+  - szbdyd.com
+  - nexusedgeio.com
+  - ahdohpiechei.com
+
+url_regex_set:
+  - '[?&]os=mcdn(?:&|$)'
+  - '^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?\/v1\/resource\/'
