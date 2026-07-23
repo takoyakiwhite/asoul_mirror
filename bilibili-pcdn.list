@@ -1,5 +1,4 @@
-URL-REGEX,os=mcdn
-URL-REGEX,^https?://[0-9.]+(:[0-9]+)?.*/upgcxcode/
+URL-REGEX,[?&]os=(mcdn|302kodo|302ppio)(&|$)
 URL-REGEX,^https?://cn-[^.]+\.bilivideo\.(com|cn)/
 DOMAIN-SUFFIX,mcdn.bilivideo.net
 DOMAIN-KEYWORD,302ppio
