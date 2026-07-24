@@ -1,7 +1,5 @@
-URL-REGEX,[?&]os=(302kodo|302ppio|mcdn)(?:&|$)
+URL-REGEX,[?&]os=mcdn(?:&|$)
 DOMAIN-KEYWORD,mcdn.bilivideo
-DOMAIN-KEYWORD,302ppio
-DOMAIN-KEYWORD,302kodo
 DOMAIN-SUFFIX,mountaintoys.cn
 DOMAIN-SUFFIX,szbdyd.com
 DOMAIN-SUFFIX,nexusedgeio.com
