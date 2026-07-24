@@ -1,5 +1,4 @@
 URL-REGEX,[?&]os=(302kodo|302ppio|mcdn)(?:&|$)
-URL-REGEX,^https?://([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?/[0-9]+/resolve\?host=
 DOMAIN-KEYWORD,302ppio
 DOMAIN-KEYWORD,302kodo
 DOMAIN-SUFFIX,mountaintoys.cn
