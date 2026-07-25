@@ -1,6 +1,12 @@
 #!name=B站去P2P CDN
 #!desc=屏蔽B站P2P CDN
 
+[Rule]
+
+DOMAIN-KEYWORD,pcdn.biliapi.net,REJECT
+DOMAIN-KEYWORD,hw-sh-pcdn,REJECT
+DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
+
 [URL Rewrite]
 
 # ==========================
@@ -64,4 +70,4 @@
 ^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/(?:v1\/resource\/)?upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 
 [MITM]
-hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.mcdn.bilivideo.cn, *.mcdn.bilivideo.cn:*, *.mcdn.bilivideo.net, *.mcdn.bilivideo.net:*, *.szbdyd.com, *.szbdyd.com:*, *.mountaintoys.cn, *.mountaintoys.cn:*, *.nexusedgeio.com, *.nexusedgeio.com:*, *.ahdohpiechei.com, *.ahdohpiechei.com:*, upos-sz-mirror*bstar1.bilivideo.com, upos-*-mirrorakam.akamaized.net
+hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.mcdn.bilivideo.cn, *.mcdn.bilivideo.net, *.szbdyd.com, *.mountaintoys.cn, *.nexusedgeio.com, *.ahdohpiechei.com, upos-hz-mirrorakam.akamaized.net, upos-bstar1-mirrorakam.akamaized.net
