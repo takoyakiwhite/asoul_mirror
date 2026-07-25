@@ -40,5 +40,8 @@
 # mountaintoys P2P（upgcxcode）
 ^https?:\/\/[a-z0-9-]+\.edge\.mountaintoys\.cn(:(4483|9102))?\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$2 302
 
+# upos-sz-mirror14b
+^https?:\/\/upos-sz-mirror14b\.bilivideo\.com\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+
 [MITM]
 hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.mcdn.bilivideo.cn, *.mcdn.bilivideo.cn:*, *.mcdn.bilivideo.net, *.mcdn.bilivideo.net:*, *.szbdyd.com, *.szbdyd.com:*, *.mountaintoys.cn, *.mountaintoys.cn:*, upos-sz-mirror*bstar1.bilivideo.com, upos-*-mirrorakam.akamaized.net
