@@ -28,8 +28,6 @@ URL-REGEX,"^https?:\/\/[a-zA-Z0-9.-]+\.ahdohpiechei\.com\/upgcxcode\/.+",REJECT
 URL-REGEX,"^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/upgcxcode\/.+",REJECT
 
 [URL Rewrite]
-# Akamai
-^https?:\/\/upos-(?:hz|bstar1)-mirrorakam\.akamaized\.net\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # mirror14b
 ^https?:\/\/upos-sz-mirror14b\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # cn-* 节点
