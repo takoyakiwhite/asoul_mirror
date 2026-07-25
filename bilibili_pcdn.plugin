@@ -1,18 +1,35 @@
 #!name=B站去P2P CDN
 #!desc=屏蔽B站P2P CDN
-#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1044.png
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1058.png
+#!system=ios
+
+[Rule]
+# ==========================
+URL-REGEX,"^https?:\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::\d+)?\/.+",REJECT
+# HTTPDNS（IP直连）
+URL-REGEX,"^https?://([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?/[0-9]+/resolve\?host=",REJECT
+# PCDN 调度
+DOMAIN-KEYWORD,pcdn.biliapi.net,REJECT
+DOMAIN-KEYWORD,hw-sh-pcdn,REJECT
+DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
+# 域名:4480
+URL-REGEX,"^https?:\/\/[^\/]+:4480\/upgcxcode\/.+",REJECT
+# IP:8000/8082（v1/resource）
+URL-REGEX,"^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}:(?:8000|8082)\/v1\/resource\/.+",REJECT
+# IP:任意端口（upgcxcode）
+URL-REGEX,"^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}:\d+\/upgcxcode\/.+",REJECT
+# szbdyd
+URL-REGEX,"^https?:\/\/[a-zA-Z0-9.-]+\.szbdyd\.com(?::\d+)?\/.+",REJECT
+# mountaintoys
+URL-REGEX,"^https?:\/\/[a-zA-Z0-9-]+\.edge\.mountaintoys\.cn(?::(?:4483|9102))?\/upgcxcode\/.+",REJECT
+# nexusedgeio
+URL-REGEX,"^https?:\/\/[a-zA-Z0-9.-]+\.nexusedgeio\.com\/upgcxcode\/.+",REJECT
+# ahdohpiechei
+URL-REGEX,"^https?:\/\/[a-zA-Z0-9.-]+\.ahdohpiechei\.com\/upgcxcode\/.+",REJECT
+# yirujs
+URL-REGEX,"^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/upgcxcode\/.+",REJECT
 
 [Rewrite]
-# ==========================
-^https?:\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::[0-9]+)?\/(.+) http://upos-sz-mirrorcos.bilivideo.com/$1 302
-# 域名:4480
-^https?:\/\/[^\/]+:4480\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
-# IP:8000/8082
-^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}(?::(?:8000|8082))?\/v1\/resource\/(.+) http://upos-sz-mirrorcos.bilivideo.com/v1/resource/$1 302
-# IP:任意端口（v1/resource）
-^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}:\d+\/v1\/resource\/(.+) http://upos-sz-mirrorcos.bilivideo.com/v1/resource/$1 302
-# IP:任意端口（upgcxcode）
-^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}:\d+\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # Akamai
 ^https?:\/\/upos-(?:hz|bstar1)-mirrorakam\.akamaized\.net\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # mirror14b
@@ -23,18 +40,6 @@
 ^https?:\/\/upos-sz-302kodo\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # 302ppio
 ^https?:\/\/upos-sz-302ppio\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
-# szbdyd
-^https?:\/\/[a-zA-Z0-9.-]+\.szbdyd\.com(?::\d+)?\/(.+) http://upos-sz-mirrorcos.bilivideo.com/$1 302
-# mcdn + szbdyd
-^https?:\/\/[a-zA-Z0-9.-]+\.mcdn\.bilivideo\.cn\.szbdyd\.com(?::\d+)?\/(.+) http://upos-sz-mirrorcos.bilivideo.com/$1 302
-# mountaintoys
-^https?:\/\/[a-zA-Z0-9-]+\.edge\.mountaintoys\.cn(?::(?:4483|9102))?\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
-# nexusedgeio
-^https?:\/\/[a-zA-Z0-9.-]+\.nexusedgeio\.com\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
-# ahdohpiechei
-^https?:\/\/[a-zA-Z0-9.-]+\.ahdohpiechei\.com\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
-# yirujs
-^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 
 [MITM]
-hostname = *.bilivideo.com, *.bilivideo.cn, *.mcdn.bilivideo.cn, *.mcdn.bilivideo.cn:*, *.mcdn.bilivideo.net, *.mcdn.bilivideo.net:*, *.szbdyd.com, *.szbdyd.com:*, *.mountaintoys.cn, *.mountaintoys.cn:*, *.nexusedgeio.com, *.nexusedgeio.com:*, *.ahdohpiechei.com, *.ahdohpiechei.com:*, upos-sz-mirror*bstar1.bilivideo.com, upos-*-mirrorakam.akamaized.net
+hostname = *.bilivideo.com, *.bilivideo.cn, upos-*-mirrorakam.akamaized.net
