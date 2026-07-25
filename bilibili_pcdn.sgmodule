@@ -36,7 +36,7 @@ DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 # yirujs
 ^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/(?:v1\/resource\/)?upgcxcode\/(.+) http://upos-sz-mirrorali.bilivideo.com/upgcxcode/$1 302
 # 兼容
-^https?:\/\/[^\/]+\/(?:v\d+\/resource\/)?upgcxcode\/([^?]+)\?(?:.*&)?os=mcdn(?:&.*)?$ http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+^https?:\/\/[^\/]+\/(?:v\d+\/resource\/)?upgcxcode\/([^?]+)\?(?:.*&)?os=mcdn(?:&.*)?$ http://upos-sz-mirrorali.bilivideo.com/upgcxcode/$1 302
 
 [MITM]
 hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.szbdyd.com, *.mountaintoys.cn, *.nexusedgeio.com, *.ahdohpiechei.com, upos-hz-mirrorakam.akamaized.net, upos-bstar1-mirrorakam.akamaized.net
