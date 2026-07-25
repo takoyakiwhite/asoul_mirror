@@ -1,0 +1,16 @@
+#!name=B站去P2P CDN
+#!desc=屏蔽B站P2P CDN
+
+[URL Rewrite]
+# 正则表达式中的(\:[0-9]+)?可以匹配任意端口，包括4480、4483、8000等
+^https?:\/\/([a-zA-Z0-9-]+)\.mcdn\.bilivideo\.(cn|net)(\:[0-9]+)?\/(.+) https://upos-sz-mirrorcos.bilivideo.com/$3 302
+# 替换szbdyd域名 (第二种P2P方式)
+^https?:\/\/([a-zA-Z0-9.-]+)\.szbdyd\.com(\:[0-9]+)?\/(.+) https://upos-sz-mirrorcos.bilivideo.com/$3 302
+# 替换直接IP:端口方式 (视频服务器) - 支持任意端口
+^https?:\/\/\d+\.\d+\.\d+\.\d+:\d+\/v1\/resource\/(.+) https://upos-sz-mirrorcos.bilivideo.com/v1/resource/$1 302
+^https?:\/\/\d+\.\d+\.\d+\.\d+:\d+\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+# 其他可能的P2P组合域名
+^https?:\/\/([a-zA-Z0-9.-]+)\.mcdn\.bilivideo\.cn\.szbdyd\.com(\:[0-9]+)?\/(.+) https://upos-sz-mirrorcos.bilivideo.com/$3 302
+
+[MITM]
+hostname = %APPEND% *.mcdn.bilivideo.cn, *.mcdn.bilivideo.cn:*, *.szbdyd.com, *.szbdyd.com:*
