@@ -1,10 +1,9 @@
 #!name=B站去P2P CDN
 #!desc=屏蔽B站P2P CDN
-#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1058.png
-#!system=ios
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1070.png
 
 [Rule]
-# ==========================
+URL-REGEX,"[?&]os=mcdn(?:&|$)",REJECT
 URL-REGEX,"^https?:\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::\d+)?\/.+",REJECT
 # HTTPDNS（IP直连）
 URL-REGEX,"^https?://([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?/[0-9]+/resolve\?host=",REJECT
@@ -14,10 +13,10 @@ DOMAIN-KEYWORD,hw-sh-pcdn,REJECT
 DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 # 域名:4480
 URL-REGEX,"^https?:\/\/[^\/]+:4480\/upgcxcode\/.+",REJECT
-# IP:8000/8082（v1/resource）
-URL-REGEX,^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}:(?:8000|8082)\/v1\/resource\/.+,REJECT
-# IP:任意端口（upgcxcode）
-URL-REGEX,^https?:\/\/(?:\d{1,3}\.){3}\d{1,3}:\d+\/upgcxcode\/.+,REJECT
+# IP:v1/resource（允许无端口）
+URL-REGEX,"^https?:\/\/([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?\/v1\/resource\/.+",REJECT
+# IP:upgcxcode（允许无端口）
+URL-REGEX,"^https?:\/\/([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?\/upgcxcode\/.+",REJECT
 # szbdyd
 URL-REGEX,"^https?:\/\/[a-zA-Z0-9.-]+\.szbdyd\.com(?::\d+)?\/.+",REJECT
 # mountaintoys
@@ -30,8 +29,6 @@ URL-REGEX,"^https?:\/\/[a-zA-Z0-9.-]+\.ahdohpiechei\.com\/upgcxcode\/.+",REJECT
 URL-REGEX,"^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/upgcxcode\/.+",REJECT
 
 [Rewrite]
-# Akamai
-^https?:\/\/upos-(?:hz|bstar1)-mirrorakam\.akamaized\.net\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # mirror14b
 ^https?:\/\/upos-sz-mirror14b\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 # cn-* 节点
