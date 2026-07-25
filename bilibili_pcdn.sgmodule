@@ -4,7 +4,7 @@
 [URL Rewrite]
 
 # 普通 CDN（upgcxcode）
-^https?:\/\/.+\.bilivideo\.com\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+^https?:\/\/(?!upos-sz-mirrorcos\.bilivideo\.com)(.+\.)?bilivideo\.com\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$2 302
 
 # MCDN（v1/resource）
 ^https?:\/\/[adbcefxy0-9]+\.mcdn\.bilivideo\.(cn|net)(:(8000|8082))?\/v1\/resource\/(.+) https://upos-sz-mirrorcos.bilivideo.com/v1/resource/$2 302
