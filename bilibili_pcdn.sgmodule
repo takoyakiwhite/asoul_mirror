@@ -1,7 +1,9 @@
 #!name=B站去P2P CDN
 #!desc=屏蔽B站P2P CDN
+#!system=ios
 
 [Rule]
+
 # ==========================
 # MCDN
 # ==========================
@@ -11,6 +13,14 @@ URL-REGEX,^https?:\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::\d+)?\/.+,RE
 # ==========================
 # PCDN
 # ==========================
+
+# HTTPDNS（IP直连）
+URL-REGEX,^https?://([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?/[0-9]+/resolve\?host=,REJECT
+
+# PCDN 调度
+DOMAIN-KEYWORD,pcdn.biliapi.net,REJECT
+DOMAIN-KEYWORD,hw-sh-pcdn,REJECT
+DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 
 # 域名:4480
 URL-REGEX,^https?:\/\/[^\/]+:4480\/upgcxcode\/.+,REJECT
@@ -58,4 +68,4 @@ URL-REGEX,^https?:\/\/[a-zA-Z0-9-]+\.yirujs\.com\/upgcxcode\/.+,REJECT
 ^https?:\/\/upos-sz-302ppio\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 
 [MITM]
-hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.mcdn.bilivideo.cn, *.mcdn.bilivideo.cn:*, *.mcdn.bilivideo.net, *.mcdn.bilivideo.net:*, *.szbdyd.com, *.szbdyd.com:*, *.mountaintoys.cn, *.mountaintoys.cn:*, *.nexusedgeio.com, *.nexusedgeio.com:*, *.ahdohpiechei.com, *.ahdohpiechei.com:*, upos-sz-mirror*bstar1.bilivideo.com, upos-*-mirrorakam.akamaized.net
+hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, upos-*-mirrorakam.akamaized.net
