@@ -8,6 +8,7 @@
 # MCDN
 # ==========================
 
+URL-REGEX,[?&]os=mcdn(?:&|$)
 URL-REGEX,^https?:\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::\d+)?\/.+,REJECT
 
 # ==========================
