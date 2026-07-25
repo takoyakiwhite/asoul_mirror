@@ -3,9 +3,6 @@
 
 [URL Rewrite]
 
-# 普通 CDN（upgcxcode）
-^https?:\/\/(cn-[^.]+\.bilivideo\.(com|cn))\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$3 302
-
 # MCDN（v1/resource）
 ^https?:\/\/[adbcefxy0-9]+\.mcdn\.bilivideo\.(cn|net)(:(8000|8082))?\/v1\/resource\/(.+) https://upos-sz-mirrorcos.bilivideo.com/v1/resource/$2 302
 
@@ -36,6 +33,21 @@
 
 # mcdn + szbdyd 组合域名
 ^https?:\/\/([a-zA-Z0-9.-]+)\.mcdn\.bilivideo\.cn\.szbdyd\.com(\:[0-9]+)?\/(.+) https://upos-sz-mirrorcos.bilivideo.com/$3 302
+
+# cn-* 节点
+^https?:\/\/cn-.*\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+
+# upos-sz-302kodo
+^https?:\/\/upos-sz-302kodo\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+
+# upos-sz-302ppio
+^https?:\/\/upos-sz-302ppio\.bilivideo\.(?:com|cn)\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+
+# nexusedgeio
+^https?:\/\/[^\/]+\.nexusedgeio\.com\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
+
+# ahdohpiechei
+^https?:\/\/[^\/]+\.ahdohpiechei\.com\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$1 302
 
 # mountaintoys P2P（upgcxcode）
 ^https?:\/\/[a-z0-9-]+\.edge\.mountaintoys\.cn(:(4483|9102))?\/upgcxcode\/(.+) https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/$2 302
