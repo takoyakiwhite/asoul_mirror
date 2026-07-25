@@ -1,4 +1,5 @@
 URL-REGEX,[?&]os=mcdn(?:&|$)
+URL-REGEX,^https?://([0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]+)?/[0-9]+/resolve\?host=
 DOMAIN-KEYWORD,mcdn.bilivideo
 DOMAIN-SUFFIX,mountaintoys.cn
 DOMAIN-SUFFIX,szbdyd.com
