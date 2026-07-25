@@ -15,7 +15,7 @@ DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 # IP:8000/8082
 ^(https?):\/\/(?:\d{1,3}\.){3}\d{1,3}(?::(?:8000|8082))?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirrorali.bilivideo.com/upgcxcode/$2 302
 # 所有官方 upos-*、cn-*（排除 upos-sz-mirrorali）
-^(https?):\/\/(?!(?:upos-sz-mirrorali)\.bilivideo\.(?:com|cn))(?:upos|cn)-[A-Za-z0-9.-]+\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirrorali.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/(?!(?:upos-[^.]*mirrorali[a-zA-Z0-9-]*)\.bilivideo\.(?:com|cn))(?:upos|cn)-[A-Za-z0-9.-]+\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirrorali.bilivideo.com/upgcxcode/$2 302
 # szbdyd
 ^(https?):\/\/[a-zA-Z0-9.-]+\.szbdyd\.com(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirrorali.bilivideo.com/upgcxcode/$2 302
 # mcdn + szbdyd
