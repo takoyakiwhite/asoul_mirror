@@ -2,7 +2,7 @@
 #!desc=屏蔽B站P2P CDN
 
 [Rule]
-DOMAIN-KEYWORD,pcdn.biliapi.net,REJECT
+DOMAIN-SUFFIX,pcdn.biliapi.net,REJECT
 DOMAIN-KEYWORD,hw-sh-pcdn,REJECT
 DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 
