@@ -1,5 +1,4 @@
 URL-REGEX,^https?://([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?/[0-9]+/resolve\?host=
-DOMAIN-KEYWORD,mcdn.bilivideo
 DOMAIN-KEYWORD,pcdn.biliapi.net
 DOMAIN-KEYWORD,hw-sh-pcdn
 DOMAIN-KEYWORD,ali-bj-pcdn
