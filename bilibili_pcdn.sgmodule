@@ -1,6 +1,5 @@
 #!name=B站去P2P CDN
 #!desc=屏蔽B站P2P CDN
-#!system=ios
 
 [Rule]
 
