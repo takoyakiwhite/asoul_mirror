@@ -13,7 +13,7 @@ DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 # 域名:4480
 URL-REGEX,"^https?:\/\/[^\/]+:4480\/upgcxcode\/.+",REJECT
 # IP:v1/resource（允许无端口）
-URL-REGEX,^https?:\/\/([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:(?:8000|8082))?\/v1\/resource\/.+,REJECT
+URL-REGEX,^https?:\/\/([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?\/v1\/resource\/.+,REJECT
 # IP:upgcxcode（允许无端口）
 URL-REGEX,^https?:\/\/([0-9][0-9]?[0-9]?\.){3}[0-9][0-9]?[0-9]?(:[0-9]+)?\/upgcxcode\/.+,REJECT
 # szbdyd
