@@ -31,5 +31,9 @@ DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 # 兼容 os=mcdn
 ^(https?):\/\/(?!upos-[^.]*mirroralib[^.]*\.bilivideo\.(?:com|cn))[^\/]+\/(?:v\d+\/resource\/)?upgcxcode\/([^?]+)\?(?:.*&)?os=mcdn(?:&.*)?$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
 
+[Script]
+# Also rewrite the gRPC playurl so the app's primary source is CDN (fewer peer attempts). Fail-safe.
+bilibili.forcecdn = type=http-response,pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.playurl\.v1\.PlayURL\/PlayView|app\.playerunite\.v1\.Player\/PlayViewUnite|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$,requires-body=true,binary-body-mode=true,timeout=15,script-path=https://raw.githubusercontent.com/alexcding/proxy-rules/refs/heads/main/bili_overseas.js,script-update-interval=0
+
 [MITM]
 hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.bilivideo.net, *.szbdyd.com, *.mountaintoys.cn, *.nexusedgeio.com, *.ahdohpiechei.com, *.yirujs.com, upos-hz-mirrorakam.akamaized.net, upos-bstar1-mirrorakam.akamaized.net
