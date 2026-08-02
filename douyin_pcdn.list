@@ -23,11 +23,18 @@ DOMAIN-SUFFIX,comfylink.com,REJECT
 DOMAIN-SUFFIX,jikeiot.cloud,REJECT
 DOMAIN-SUFFIX,ugsdk.cn,REJECT
 
+# ── 第三方 CDN / GSLB（被抖音调度使用）──
+DOMAIN-SUFFIX,bsgslb.cn,REJECT
+DOMAIN-SUFFIX,smtcdns.com,REJECT
+DOMAIN-SUFFIX,qnqcdn.net,REJECT
+DOMAIN-SUFFIX,ksyungslb.com,REJECT
+DOMAIN-SUFFIX,wasu.tv,REJECT
+
 # ── Douyin ──
 DOMAIN-SUFFIX,ahdohpiechei.com,REJECT
 DOMAIN-SUFFIX,kuiniuca.com,REJECT
+DOMAIN-SUFFIX,manlaxycloud.com,REJECT
 
-DOMAIN,taqc3qiuoro0kbeq7o5i5cim623i8t0knms2pji0asics822rr7qumu.manlaxycloud.com,REJECT
 DOMAIN,douyinvod.com.cloudjscdn.cn,REJECT
 DOMAIN,vodzj-p3-dk.unigslb.cn,REJECT
 DOMAIN,douyinvod.com.z.glb4.com,REJECT
