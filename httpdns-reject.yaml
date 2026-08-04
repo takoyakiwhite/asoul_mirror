@@ -1,0 +1,154 @@
+no_resolve: true
+
+domain_set:
+
+  # Xiaodu
+  # - im-x.jd.com
+  - adtrack.qianwen.com
+  - crab.baidu.com             # DivineEngin / AWAvenue / Aegis 未命中 | Dler CN 命中
+  - sofire.baidu.com           # DivineEngin / AWAvenue / Aegis 未命中 | Dler CN 命中
+  - pufferstatis.xdrtc.com     # 命中
+
+  # 萤石
+  # i.ys7.com 消息推送 Thumbnail 缩略图
+  - bfe.ys7.com
+  - log.ys7.com
+  # - ecapi-flood.ys7.com
+  - abt-online.netease.im
+  - license.vod2.myqcloud.com
+
+  # 萤石 Huawei HTTPDNS
+  - httpdns.yunxindns.com
+
+  # 美团 HTTPDNS
+  - httpdns.meituan.com
+  - httpdnsmultiapi.meituan.com
+  - httpdnsmultiapivip.meituan.com
+  - hcdnl.pull302.gslb.livehwc3.cn
+  - resolvers-cn.httpdns.aliyuncs.com
+  - dnspod.meituan.httpdns.qcloud.com
+  - dnspod.meituan.httpdns.start.qcloud.com
+
+  - sessions.bugsnag.com
+
+  # 盒马
+  - alilang-intranet.alibaba-inc.com
+
+  # Taobao
+  - mum.alibabachengdun.com
+  - mum.alibabachengdun.net
+
+  # PCDN
+  # https://github.com/enriquephl/QuantumultX_config/blob/main/filters/NoMalwares.conf
+  - tp2p.kg.qq.com
+  - sd-gl.xinqiucc.com
+  - spcsz.cdn.bcebos.com
+
+  - market.qunar.com
+  - sat0.net
+
+domain_wildcard_set:
+
+  # PCDN
+  # https://github.com/enriquephl/QuantumultX_config/blob/main/filters/NoMalwares.conf
+  # HOST, xpis-xcdn.youku.com
+  # HOST, xpis-mob-xcdn.youku.com
+  # HOST, xpis-tel-xcdn.youku.com
+  # HOST-WILDCARD, xpis-*-xcdn.youku.com
+  - "*-xcdn.youku.com"
+
+  # Lark 飞书
+  - "mon-*.byteoversea.com"
+
+domain_regex_set:
+  # match: "^(ad|ads)-?\\..*|^ads\\..*"
+  # - "^ads?[-.].*"
+  # - "^ads?.*\."
+  - "^ads?[-.a-z]"
+
+# domain_regex_set:
+#   - \.(.+-)?ap-shanghai(-.+)?\.myqcloud\.com$
+#   - ^.+-mihayo\.akamaized\.net$
+#   - .+\.azchcdn[a-s]\.com$
+
+domain_keyword_set:
+  - analy
+  - httpdns
+  - tracing
+  - tracking
+
+domain_suffix_set:
+  # Google
+  - googletagmanager.com
+  - app-analytics-services.com
+  - connectivitycheck.gstatic.com
+  - crashlyticsreports-pa.googleapis.com
+
+  # 萤石
+  - umeng.com
+  - umengcloud.com
+  # 小度
+  - hookspf.com
+  - anythinktech.com
+  # cpc-service-square.yunxish.com
+  - yunxish.com
+  # cpc-service-square.iggrowth.cn
+  - iggrowth.cn
+
+  # 美团
+  - httpdns.qcloud.com
+
+  # PCDN
+  # https://github.com/enriquephl/QuantumultX_config/blob/main/filters/NoMalwares.conf
+  - tec73.com
+  - qiezibenpao.com
+
+  # sdkgen.data.tianwenca.com/o_live_p2p_mobilesdk
+  - tianwenca.com
+
+  - alibabachengdun.com
+
+  # - g.doubleclick-cn.net
+  # - googlesyndication-cn.com
+
+# https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/Telegram/Telegram.list
+# OR,((IP-ASN,44907,no-resolve),(IP-ASN,59930,no-resolve),(IP-ASN,62014,no-resolve),(IP-ASN,62041,no-resolve),(IP-ASN,211157,no-resolve))
+
+# https://github.com/shanhaishishan/Egern/blob/master/Rule/Telegram/Telegram.yaml
+# or_set:
+# - - !asn
+#     match: '44907'
+#     no_resolve: true
+#   - !asn
+#     match: '59930'
+#     no_resolve: true
+#   - !asn
+#     match: '62014'
+#     no_resolve: true
+#   - !asn
+#     match: '62041'
+#     no_resolve: true
+#   - !asn
+#     match: '211157'
+#     no_resolve: true
+
+# https://github.com/mist-whisper/Surge/blob/master/Rules/AI/AI.list
+# AND,((DOMAIN-KEYWORD,chatgpt-async-webps-prod-),(DOMAIN-SUFFIX,webpubsub.azure.com))
+# AND,((DOMAIN-KEYWORD,openaicom-api-),(DOMAIN-SUFFIX,azurefd.net))
+
+# https://github.com/shanhaishishan/Egern/blob/master/Rule/AI/AI.yaml
+# and_set:
+# - - !domain_keyword
+#     match: chatgpt-async-webps-prod-
+#   - !domain_suffix
+#     match: webpubsub.azure.com
+# - - !domain_keyword
+#     match: openaicom-api-
+#   - !domain_suffix
+#     match: azurefd.net
+
+# and_set:
+# - - !protocol:
+#     match: udp
+#   - !dest_port:
+#     match: "6750"
