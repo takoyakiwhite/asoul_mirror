@@ -27,10 +27,9 @@ DOMAIN,spcsz.cdn.bcebos.com
 DOMAIN,market.qunar.com
 DOMAIN,sat0.net
 
-HOST-WILDCARD,*-xcdn.youku.com
-HOST-WILDCARD,mon-*.byteoversea.com
-
-DOMAIN-REGEX,^ads?[-.a-z]
+URL-REGEX,^https?://[^/.]+(?:-[^/.]+)*-xcdn\.youku\.com(?::\d+)?(?:/|$)
+URL-REGEX,^https?://mon-[^.]+\.byteoversea\.com(?::\d+)?(?:/|$)
+URL-REGEX,^https?://ads?(?:[-.][A-Za-z0-9-]+)+(?:[:/]|$)
 
 DOMAIN-KEYWORD,analy
 DOMAIN-KEYWORD,httpdns
