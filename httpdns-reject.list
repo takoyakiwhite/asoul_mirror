@@ -1,6 +1,3 @@
-IP-CIDR6,2400::/12,no-resolve
-IP-CIDR6,240e::/16,no-resolve
-
 DOMAIN,adtrack.qianwen.com
 DOMAIN,crab.baidu.com
 DOMAIN,sofire.baidu.com
