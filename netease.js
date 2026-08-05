@@ -30,10 +30,22 @@ function writeCache() {
     }
 }
 
+function setHeader(name, value) {
+    const key = Object.keys(headers).find(
+        k => k.toLowerCase() === name.toLowerCase()
+    );
+
+    if (key) {
+        headers[key] = value;
+    } else {
+        headers[name] = value;
+    }
+}
+
 function applyConfig() {
-    headers.cookie = cookie;
-    headers["mconfig-info"] = mconfig;
-    headers["user-agent"] = userAgent;
+    setHeader("Cookie", cookie);
+    setHeader("MConfig-Info", mconfig);
+    setHeader("User-Agent", userAgent);
 
     console.log("✅ 网易云音乐共享会员已启用");
 
