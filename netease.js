@@ -1,12 +1,13 @@
 const url = $request.url;
 const headers = $request.headers;
 
-const Cookie = ($argument?.Cookie || "").trim();
-const MConfigInfo = ($argument?.MConfigInfo || "").trim();
-const UserAgent = ($argument?.UserAgent || "").trim();
-
-const CONFIG_URL = ($argument?.ConfigURL || "").trim();
-const CONFIG_UA = ($argument?.ConfigUserAgent || "").trim();
+const {
+    Cookie = "",
+    MConfigInfo = "",
+    UserAgent = "",
+    ConfigURL = "",
+    ConfigUserAgent = ""
+} = $argument || {};
 
 const CACHE = {
     cookie: "Music163_Cookie",
@@ -14,32 +15,28 @@ const CACHE = {
     ua: "Music163_UserAgent"
 };
 
-let cookie = Cookie || ($persistentStore.read(CACHE.cookie) || "");
-let mconfig = MConfigInfo || ($persistentStore.read(CACHE.mconfig) || "");
-let userAgent = UserAgent || ($persistentStore.read(CACHE.ua) || "");
+let cookie = Cookie.trim() || ($persistentStore.read(CACHE.cookie) || "");
+let mconfig = MConfigInfo.trim() || ($persistentStore.read(CACHE.mconfig) || "");
+let userAgent = UserAgent.trim() || ($persistentStore.read(CACHE.ua) || "");
+
+function finish() {
+    $done({ headers });
+}
 
 function writeCache() {
-    if (cookie) {
-        $persistentStore.write(cookie, CACHE.cookie);
-    }
-    if (mconfig) {
-        $persistentStore.write(mconfig, CACHE.mconfig);
-    }
-    if (userAgent) {
-        $persistentStore.write(userAgent, CACHE.ua);
-    }
+    if (cookie) $persistentStore.write(cookie, CACHE.cookie);
+    if (mconfig) $persistentStore.write(mconfig, CACHE.mconfig);
+    if (userAgent) $persistentStore.write(userAgent, CACHE.ua);
 }
 
 function setHeader(name, value) {
-    const key = Object.keys(headers).find(
-        k => k.toLowerCase() === name.toLowerCase()
-    );
-
-    if (key) {
-        headers[key] = value;
-    } else {
-        headers[name] = value;
+    for (const key in headers) {
+        if (key.toLowerCase() === name.toLowerCase()) {
+            headers[key] = value;
+            return;
+        }
     }
+    headers[name] = value;
 }
 
 function applyConfig() {
@@ -48,44 +45,18 @@ function applyConfig() {
     setHeader("User-Agent", userAgent);
 
     console.log("✅ 网易云音乐共享会员已启用");
-
-    $done({ headers });
+    finish();
 }
 
-if (
-    !url.includes(".music.163.com/") ||
-    !url.includes("/interface")
-) {
-
-    $done({});
-
-} else if (cookie && mconfig && userAgent) {
-
-    if (Cookie || MConfigInfo || UserAgent) {
-        writeCache();
-        console.log("📦 使用本地共享配置");
-    } else {
-        console.log("📦 使用缓存共享配置");
-    }
-
-    applyConfig();
-
-} else if (!CONFIG_URL || !CONFIG_UA) {
-
-    console.log("ℹ️ 未配置远程共享");
-
-    $done({});
-
-} else {
-
+function loadRemote() {
     console.log("🌐 获取远程共享配置...");
 
     $httpClient.get(
         {
-            url: CONFIG_URL,
+            url: ConfigURL.trim(),
             timeout: 5000,
             headers: {
-                "User-Agent": CONFIG_UA
+                "User-Agent": ConfigUserAgent.trim()
             }
         },
         (err, resp, data) => {
@@ -100,18 +71,15 @@ if (
 
                 const json = JSON.parse(data);
 
-                if (
-                    !Array.isArray(json.configs) ||
-                    json.configs.length === 0
-                ) {
+                if (!Array.isArray(json.configs) || !json.configs.length) {
                     throw new Error("configs 为空");
                 }
 
                 const cfg = json.configs[0];
 
-                cookie = (cfg.cookie || "").trim();
-                mconfig = (cfg.mconfigInfo || "").trim();
-                userAgent = (cfg.userAgent || "").trim();
+                cookie = String(cfg.cookie || "").trim();
+                mconfig = String(cfg.mconfigInfo || "").trim();
+                userAgent = String(cfg.userAgent || "").trim();
 
                 if (!cookie || !mconfig || !userAgent) {
                     throw new Error("远程配置字段缺失");
@@ -125,7 +93,7 @@ if (
 
             } catch (e) {
 
-                console.log("❌ 配置解析失败：" + e);
+                console.log("❌ 配置解析失败：" + e.message);
 
                 $done({});
 
@@ -133,5 +101,36 @@ if (
 
         }
     );
+}
+
+if (
+    !url.includes(".music.163.com/") ||
+    !url.includes("/interface")
+) {
+    $done({});
+}
+
+else if (cookie && mconfig && userAgent) {
+
+    if (Cookie || MConfigInfo || UserAgent) {
+        writeCache();
+        console.log("📦 使用本地共享配置");
+    } else {
+        console.log("📦 使用缓存共享配置");
+    }
+
+    applyConfig();
+}
+
+else if (!ConfigURL.trim() || !ConfigUserAgent.trim()) {
+
+    console.log("ℹ️ 未配置远程共享");
+
+    $done({});
+}
+
+else {
+
+    loadRemote();
 
 }
