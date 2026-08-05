@@ -94,10 +94,13 @@ http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vip
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/(?:homepage\/|v6\/)?playlist\/(?!(?:delete|subscribe|unsubscribe)) script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]歌单, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
 
 # 会员模块（认证、权益、会员标识等）
-http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vipauth\/app\/(?:auth|interests(?:\/.*)?|memberlogo(?:\/.*)?)(?:\?.*)?$ script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]会员模块, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
+http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vipauth\/app(?:\/.*)?(?:\?.*)?$ script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]会员模块, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
 
 # 我的页面 VIP 图标
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/resniche\/mypage\/vip\/icon\/info\/get script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]VIP图标, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
+
+# 试听歌曲权益
+http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vipmall\/interest\/trialsong\/listen script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]试听权益, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
 
 [MITM]
 hostname = interface*.music.163.com, ipv4.music.163.com
