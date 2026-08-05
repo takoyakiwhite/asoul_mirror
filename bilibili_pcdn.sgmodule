@@ -46,4 +46,4 @@ DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 ^(https?):\/\/(?!upos-[^.]*mirroralib[^.]*\.bilivideo\.(?:com|cn))[^\/]+\/(?:v\d+\/resource\/)?upgcxcode\/([^?]+)\?(?:.*&)?os=mcdn(?:&.*)?$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
 
 [MITM]
-hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.bilivideo.net, *.szbdyd.com, *.mountaintoys.cn, *.nexusedgeio.com, *.ahdohpiechei.com, *.yirujs.com, upos-hz-mirrorakam.akamaized.net, upos-bstar1-mirrorakam.akamaized.net
+hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.bilivideo.net, *.szbdyd.com, *.mountaintoys.cn, *.nexusedgeio.com, *.ahdohpiechei.com, *.yirujs.com
