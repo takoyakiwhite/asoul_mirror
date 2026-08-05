@@ -52,13 +52,17 @@ function loadRemote() {
     console.log("🌐 获取远程共享配置...");
 
     $httpClient.get(
-        {
-            url: ConfigURL.trim(),
-            timeout: 5000,
-            headers: {
-                "User-Agent": ConfigUserAgent.trim()
-            }
-        },
+    {
+        url: ConfigURL.trim(),
+        timeout: 5000,
+        headers: {
+            "Accept": "*/*",
+            "User-Agent": ConfigUserAgent.trim(),
+            "Priority": "u=3",
+            "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+            "Accept-Encoding": "gzip, deflate, br"
+        }
+    },
         (err, resp, data) => {
 
             if (err || !data) {
