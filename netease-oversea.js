@@ -132,15 +132,19 @@ async function recursiveModify(data) {
 
     try {
         let obj;
-        if (isEapi) {
-            let decryptedBody = eapiDecrypt(body);
-            // 为处理js的精度问题，原项目将长整型数字转为字符串后加"L"，这里进行适配
-            decryptedBody = decryptedBody.replace(/([^\\]":\s*)(\d{16,})/g, '$1"$2L"');
-            obj = JSON.parse(decryptedBody);
-        } else {
-            // weapi 和普通 api 是明文
-            obj = JSON.parse(body);
-        }
+
+try {
+    // 先尝试按普通 JSON 解析
+    obj = JSON.parse(body);
+} catch (_) {
+    // JSON 解析失败，再按 EAPI 加密数据解密
+    let decryptedBody = eapiDecrypt(body);
+    decryptedBody = decryptedBody.replace(
+        /([^\\]":\s*)(\d{16,})/g,
+        '$1"$2L"'
+    );
+    obj = JSON.parse(decryptedBody);
+}
 
         // 核心修改逻辑
         await processBody(obj, url);
