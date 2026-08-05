@@ -21,13 +21,10 @@ Music163_Unlock = switch, "false", "true", tag=解除海外限制, desc=启用�
 # ===============================
 
 # 音源解锁（请求）
-
-http-request ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?e?api\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease-header.js, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
+http-request ^https?:\/\/(?:music|(?:ipv4|interface\d*)\.music)\.163\.com\/(?:w|x)?e?api\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease-header.js, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
 
 # 音源解锁（响应）
-
-http-response ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?e?api\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease.js, requires-body=true, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
+http-response ^https?:\/\/(?:music|(?:ipv4|interface\d*)\.music)\.163\.com\/(?:w|x)?e?api\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease.js, requires-body=true, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
 
 [MITM]
-
 hostname = music.163.com, ipv4.music.163.com, interface*.music.163.com
