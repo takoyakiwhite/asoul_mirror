@@ -20,6 +20,10 @@ const setHeader = (name, value) => {
     }
 };
 
-setHeader("X-Real-IP", "116.25.146.177");
+// 随机生成 116.25.x.x（避免 .0 和 .255）
+const random = () => Math.floor(Math.random() * 254) + 1;
+const fakeIP = `116.25.${random()}.${random()}`;
+
+setHeader("X-Real-IP", fakeIP);
 
 $done({ headers });
