@@ -1,12 +1,24 @@
 const url = $request.url;
 const headers = $request.headers;
 
+// 本地参数
 const Cookie = ($argument?.Cookie || "").trim();
 const MConfigInfo = ($argument?.MConfigInfo || "").trim();
 const UserAgent = ($argument?.UserAgent || "").trim();
 
+// 远程配置
 const CONFIG_URL = ($argument?.ConfigURL || "").trim();
 const CONFIG_UA = ($argument?.ConfigUserAgent || "").trim();
+
+// 持久化缓存 Key
+const COOKIE_KEY = "Music163_Cookie";
+const MCONFIG_KEY = "Music163_MConfigInfo";
+const UA_KEY = "Music163_UserAgent";
+
+// 参数优先，其次缓存
+let cookie = Cookie || ($persistentStore.read(COOKIE_KEY) || "");
+let mconfig = MConfigInfo || ($persistentStore.read(MCONFIG_KEY) || "");
+let userAgent = UserAgent || ($persistentStore.read(UA_KEY) || "");
 
 function applyConfig(cookie, mconfig, userAgent) {
     headers["cookie"] = cookie;
@@ -27,11 +39,20 @@ if (
 
     $done({});
 
-} else if (Cookie && MConfigInfo && UserAgent) {
+} else if (cookie && mconfig && userAgent) {
 
-    console.log("📦 使用本地共享配置");
+    // 如果是参数传入，顺便更新缓存
+    if (Cookie) $persistentStore.write(Cookie, COOKIE_KEY);
+    if (MConfigInfo) $persistentStore.write(MConfigInfo, MCONFIG_KEY);
+    if (UserAgent) $persistentStore.write(UserAgent, UA_KEY);
 
-    applyConfig(Cookie, MConfigInfo, UserAgent);
+    console.log(
+        Cookie || MConfigInfo || UserAgent
+            ? "📦 使用本地共享配置"
+            : "📦 使用缓存共享配置"
+    );
+
+    applyConfig(cookie, mconfig, userAgent);
 
 } else if (!CONFIG_URL || !CONFIG_UA) {
 
@@ -77,15 +98,20 @@ if (
 
                 const cfg = json.configs[0];
 
-                const cookie = Cookie || cfg.cookie || "";
-                const mconfig = MConfigInfo || cfg.mconfigInfo || "";
-                const userAgent = UserAgent || cfg.userAgent || "";
+                cookie = Cookie || cfg.cookie || "";
+                mconfig = MConfigInfo || cfg.mconfigInfo || "";
+                userAgent = UserAgent || cfg.userAgent || "";
 
                 if (!cookie || !mconfig || !userAgent) {
                     throw new Error("远程配置字段缺失");
                 }
 
-                console.log("✅ 已加载远程共享配置");
+                // 写入持久化缓存
+                $persistentStore.write(cookie, COOKIE_KEY);
+                $persistentStore.write(mconfig, MCONFIG_KEY);
+                $persistentStore.write(userAgent, UA_KEY);
+
+                console.log("✅ 已加载远程共享配置并写入缓存");
 
                 applyConfig(cookie, mconfig, userAgent);
 
