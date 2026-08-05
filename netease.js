@@ -32,9 +32,7 @@ function applyConfig() {
 
     console.log("✅ 网易云音乐共享会员已启用");
 
-    return $done({
-        headers
-    });
+    $done({ headers });
 }
 
 if (
@@ -42,12 +40,9 @@ if (
     !url.includes("/interface")
 ) {
 
-    return $done({});
+    $done({});
 
-}
-
-// 参数优先
-if (cookie && mconfig && userAgent) {
+} else if (cookie && mconfig && userAgent) {
 
     if (Cookie || MConfigInfo || UserAgent) {
         writeCache();
@@ -56,74 +51,75 @@ if (cookie && mconfig && userAgent) {
         console.log("📦 使用缓存共享配置");
     }
 
-    return applyConfig();
+    applyConfig();
 
-}
-
-// 未配置远程
-if (!CONFIG_URL || !CONFIG_UA) {
+} else if (!CONFIG_URL || !CONFIG_UA) {
 
     console.log("ℹ️ 未配置远程共享");
 
-    return $done({});
+    $done({});
+
+} else {
+
+    console.log("🌐 获取远程共享配置...");
+
+    $httpClient.get(
+        {
+            url: CONFIG_URL,
+            timeout: 5000,
+            headers: {
+                "User-Agent": CONFIG_UA
+            }
+        },
+        (err, resp, data) => {
+
+            if (err || !data) {
+
+                console.log("❌ 获取远程配置失败");
+
+                $done({});
+
+                return;
+
+            }
+
+            try {
+
+                const json = JSON.parse(data);
+
+                if (!Array.isArray(json.configs) || json.configs.length === 0) {
+                    throw new Error("configs 为空");
+                }
+
+                const cfg = json.configs.find(item =>
+                    item.cookie &&
+                    item.mconfigInfo &&
+                    item.userAgent
+                );
+
+                if (!cfg) {
+                    throw new Error("没有可用配置");
+                }
+
+                cookie = cfg.cookie.trim();
+                mconfig = cfg.mconfigInfo.trim();
+                userAgent = cfg.userAgent.trim();
+
+                writeCache();
+
+                console.log("✅ 已加载远程共享配置并写入缓存");
+
+                applyConfig();
+
+            } catch (e) {
+
+                console.log("❌ 配置解析失败：" + e);
+
+                $done({});
+
+            }
+
+        }
+    );
 
 }
-
-console.log("🌐 获取远程共享配置...");
-
-$httpClient.get(
-    {
-        url: CONFIG_URL,
-        timeout: 5000,
-        headers: {
-            "User-Agent": CONFIG_UA
-        }
-    },
-    (err, resp, data) => {
-
-        if (err || !data) {
-
-            console.log("❌ 获取远程配置失败");
-
-            return $done({});
-
-        }
-
-        try {
-
-            const json = JSON.parse(data);
-
-            if (!Array.isArray(json.configs) || json.configs.length === 0) {
-                throw new Error("configs 为空");
-            }
-
-            const cfg = json.configs.find(item =>
-                item.cookie &&
-                item.mconfigInfo &&
-                item.userAgent
-            );
-
-            if (!cfg) {
-                throw new Error("没有可用配置");
-            }
-
-            cookie = cfg.cookie.trim();
-            mconfig = cfg.mconfigInfo.trim();
-            userAgent = cfg.userAgent.trim();
-
-            writeCache();
-
-            console.log("✅ 已加载远程共享配置并写入缓存");
-
-            return applyConfig();
-
-        } catch (e) {
-
-            console.log("❌ 配置解析失败：" + e);
-
-            return $done({});
-
-        }
-
-    }
-);
