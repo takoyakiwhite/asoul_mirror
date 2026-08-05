@@ -69,6 +69,8 @@ http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/v3\
 
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/song\/(?:chorus|enhance(?:\/.*)?|play|type\/detail\/get|music\/detail\/get) script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]播放会员歌曲, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
 
+http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/privilege\/song\/charge\/info script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]播放会员歌曲, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
+
 # 播放器会员皮肤
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/playermode\/ script-path=https://loon.103516.xyz/Script/NeteaseMusic/CloudMusicVIP.js, timeout=20, tag=[网易云音乐]播放器会员皮肤, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent}]"
 
