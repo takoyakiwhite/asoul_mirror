@@ -95,4 +95,4 @@ http-request ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?eapi\/.* s
 http-response ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?eapi\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease.js, requires-body=true, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
 
 [MITM]
-hostname = interface*.music.163.com, ipv4.music.163.com
+hostname = music.163.com, interface*.music.163.com, ipv4.music.163.com
