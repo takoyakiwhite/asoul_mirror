@@ -13,6 +13,8 @@ Music163_VIP_Shared = switch, "false", "true", tag=启用共享会员, desc=启�
 Cookie = input, "", tag=Cookie, desc=填写共享账号 Cookie
 MConfigInfo = input, "", tag=MConfigInfo, desc=填写共享账号 MConfigInfo
 UserAgent = input, "", tag=UserAgent, desc=填写共享账号 User-Agent
+ConfigURL = input, "", tag=远程配置地址, desc=共享配置 JSON 地址
+ConfigUserAgent = input, "", tag=远程配置UA, desc=请求共享配置时使用的 User-Agent
 
 [Rule]
 # 广告域名
