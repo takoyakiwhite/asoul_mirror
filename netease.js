@@ -8,7 +8,6 @@ const UserAgent = ($argument?.UserAgent || "").trim();
 const CONFIG_URL = ($argument?.ConfigURL || "").trim();
 const CONFIG_UA = ($argument?.ConfigUserAgent || "").trim();
 
-// 持久化缓存 Key
 const CACHE = {
     cookie: "Music163_Cookie",
     mconfig: "Music163_MConfigInfo",
@@ -20,13 +19,19 @@ let mconfig = MConfigInfo || ($persistentStore.read(CACHE.mconfig) || "");
 let userAgent = UserAgent || ($persistentStore.read(CACHE.ua) || "");
 
 function writeCache() {
-    $persistentStore.write(cookie, CACHE.cookie);
-    $persistentStore.write(mconfig, CACHE.mconfig);
-    $persistentStore.write(userAgent, CACHE.ua);
+    if (cookie) {
+        $persistentStore.write(cookie, CACHE.cookie);
+    }
+    if (mconfig) {
+        $persistentStore.write(mconfig, CACHE.mconfig);
+    }
+    if (userAgent) {
+        $persistentStore.write(userAgent, CACHE.ua);
+    }
 }
 
 function applyConfig() {
-    headers["cookie"] = cookie;
+    headers.cookie = cookie;
     headers["mconfig-info"] = mconfig;
     headers["user-agent"] = userAgent;
 
@@ -74,36 +79,31 @@ if (
         (err, resp, data) => {
 
             if (err || !data) {
-
                 console.log("❌ 获取远程配置失败");
-
                 $done({});
-
                 return;
-
             }
 
             try {
 
                 const json = JSON.parse(data);
 
-                if (!Array.isArray(json.configs) || json.configs.length === 0) {
+                if (
+                    !Array.isArray(json.configs) ||
+                    json.configs.length === 0
+                ) {
                     throw new Error("configs 为空");
                 }
 
-                const cfg = json.configs.find(item =>
-                    item.cookie &&
-                    item.mconfigInfo &&
-                    item.userAgent
-                );
+                const cfg = json.configs[0];
 
-                if (!cfg) {
-                    throw new Error("没有可用配置");
+                cookie = (cfg.cookie || "").trim();
+                mconfig = (cfg.mconfigInfo || "").trim();
+                userAgent = (cfg.userAgent || "").trim();
+
+                if (!cookie || !mconfig || !userAgent) {
+                    throw new Error("远程配置字段缺失");
                 }
-
-                cookie = cfg.cookie.trim();
-                mconfig = cfg.mconfigInfo.trim();
-                userAgent = cfg.userAgent.trim();
 
                 writeCache();
 
