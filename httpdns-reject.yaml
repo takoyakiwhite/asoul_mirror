@@ -81,7 +81,6 @@ domain_suffix_set:
   # Google
   - googletagmanager.com
   - app-analytics-services.com
-  - connectivitycheck.gstatic.com
   - crashlyticsreports-pa.googleapis.com
 
   # 萤石
