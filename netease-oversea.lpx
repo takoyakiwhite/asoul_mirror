@@ -30,4 +30,4 @@ http-response ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?e?api\/.*
 
 [MITM]
 
-hostname = music.163.com, ipv4.music.163.com, interface.music.163.com, interface1.music.163.com, interface2.music.163.com
+hostname = music.163.com, ipv4.music.163.com, interface*.music.163.com
