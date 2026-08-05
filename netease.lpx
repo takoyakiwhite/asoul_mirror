@@ -12,6 +12,8 @@
 
 Music163_VIP_Shared = switch, "false", "true", tag=启用共享会员, desc=启用网易云音乐共享会员功能
 
+Music163_Unlock = switch, "false", "true", tag=解除海外限制, desc=启用网易云音乐解除海外限制功能
+
 Cookie = input, "", tag=Cookie, desc=共享账号 Cookie
 
 MConfigInfo = input, "", tag=MConfigInfo, desc=共享账号 MConfigInfo
@@ -83,6 +85,14 @@ http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vip
 # 会员信息
 
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/(?:music-vip-membership\/(?:client|front)\/vip\/info|vip-center-bff\/(?:card\/entry\/list|float\/data|quality\/auth\/info)|v1\/user\/info) script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/netease.js, timeout=20, tag=[网易云]会员信息, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent},{ConfigURL},{ConfigUserAgent}]"
+
+# 音源解锁（请求）
+
+http-request ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?eapi\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease-header.js, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
+
+# 音源解锁（响应）
+
+http-response ^https?:\/\/(ipv4|interface\d?|music)\.163\.com\/(?:w|x)?eapi\/.* script-path=https://raw.githubusercontent.com/QuellaMC/NeteaseUnlocker/main/js/unblock-netease.js, requires-body=true, timeout=60, tag=[网易云]解除海外限制, enable={Music163_Unlock}
 
 [MITM]
 hostname = interface*.music.163.com, ipv4.music.163.com
