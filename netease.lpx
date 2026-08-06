@@ -85,4 +85,4 @@ http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vip
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/(?:music-vip-membership\/(?:client|front)\/vip\/info|vip-center-bff\/(?:card\/entry\/list|float\/data|quality\/auth\/info)|v1\/user\/info) script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/netease.js, timeout=20, tag=[网易云]会员信息, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent},{ConfigURL},{ConfigUserAgent}]"
 
 [MITM]
-hostname = interface*.music.163.com, ipv4.music.163.com
+hostname = music.163.com, interface*.music.163.com, ipv4.music.163.com
