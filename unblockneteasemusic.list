@@ -1,6 +1,38 @@
-DOMAIN,music.163.com
-DOMAIN,interface.music.163.com
-DOMAIN,interface3.music.163.com
-DOMAIN,interfacepc.music.163.com
-DOMAIN,interface.music.163.com.163jiasu.com
-DOMAIN,interface3.music.163.com.163jiasu.com
+# 歌单
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:v3\/playlist\/detail|v6\/playlist\/detail|playlist\/v4\/detail|playlist\/privilege)(?:\?.*)?$
+
+# 歌曲详情
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/v3\/song\/detail(?:\?.*)?$
+
+# 播放相关
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:album\/play|artist\/privilege|album\/privilege|song\/enhance\/player\/url|song\/enhance\/player\/url\/v1|song\/enhance\/download\/url|song\/enhance\/download\/url\/v1|song\/enhance\/privilege|listen\/together\/privilege\/get|playmode\/intelligence\/list)(?:\?.*)?$
+
+# 歌手
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:v1\/artist|v1\/artist\/songs|v2\/artist\/songs|artist\/top\/song)(?:\?.*)?$
+
+# 专辑
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:v1\/album|album\/v3\/detail)(?:\?.*)?$
+
+# 搜索
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:v1\/search\/get|v1\/search\/song\/get|search\/complex\/get|search\/complex\/page|search\/pc\/complex\/get|search\/pc\/complex\/page|search\/song\/list\/page|search\/song\/page|cloudsearch\/pc)(?:\?.*)?$
+
+# 歌单操作
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:v1\/playlist\/manipulate\/tracks|song\/like|v1\/play\/record|v1\/radio\/get)(?:\?.*)?$
+
+# 每日推荐
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/v1\/discovery\/recommend\/songs(?:\?.*)?$
+
+# 播放器皮肤
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/usertool\/sound\/mobile\/(?:promote|theme|animationList|all|detail)(?:\?.*)?$
+
+# VIP 认证
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/vipauth\/app\/auth\/query(?:\?.*)?$
+
+# 会员信息
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/music-vip-membership\/client\/vip\/info(?:\?.*)?$
+
+# 广告
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/ad(?:\?.*)?$
+
+# Batch
+URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:batch|api\/batch)(?:\?.*)?$
