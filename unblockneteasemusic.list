@@ -1,3 +1,6 @@
+# 歌曲替换
+URL-REGEX,^https?:\/\/music\.163\.com\/package(?:\/|$)
+
 # 歌单
 URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/(?:v3\/playlist\/detail|v6\/playlist\/detail|playlist\/v4\/detail|playlist\/privilege)(?:\?.*)?$
 
