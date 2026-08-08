@@ -22,6 +22,9 @@ URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.co
 # 喜欢歌曲
 URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/song\/like(?:\?.*)?$
 
+# 喜欢电台
+URL-REGEX,^https?://(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?/(?:(?:w|x)?eapi|api)/radio/like(?:\?.*)?$
+
 # 播放记录
 URL-REGEX,^https?:\/\/(?:music|interface|interface3|interfacepc)\.music\.163\.com(?:\.163jiasu\.com)?\/(?:(?:w|x)?eapi|api)\/v1\/play\/record(?:\?.*)?$
 
