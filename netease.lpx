@@ -40,7 +40,7 @@ DOMAIN,ipv4.music.163.com,REJECT
 
 DOMAIN,ipv6.music.163.com,REJECT
 
-[URL Rewrite]
+[Rewrite]
 
 ^https:\/\/(m\d+\.music\.126\.net\/.+\.(?:flac|mp3|m4a)(?:\?.*)?)$ http://$1 302
 
