@@ -42,7 +42,9 @@ DOMAIN,ipv6.music.163.com,REJECT
 
 [Rewrite]
 
-^https:\/\/(m\d+\.music\.126\.net\/.+\.(?:flac|mp3|m4a)(?:\?.*)?)$ http://$1 302
+^https:\/\/(m\d+\.music\.126\.net\/.+)$ http://$1 302
+
+^https:\/\/([a-z0-9-]+-er\.kuwo\.cn\/.+)$ http://$1 302
 
 [Script]
 
