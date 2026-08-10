@@ -2,68 +2,113 @@
 # UnblockNeteaseMusic
 # Surge Rules
 # Based on hook(3).js
+#
+# hook.target.host = 8
+# hook.target.path = 45
 # ==========================================
 
 
 # ==========================================
-# WebAPI / API
-# /weapi/* 会被 hook.js 转换为 /api/*
+# WebAPI
+#
+# hook.js:
+# /weapi/xxx
+#     ↓
+# /api/xxx
+#
+# 同时允许 hook.js 后续会移除的末尾 /数字
 # ==========================================
 
-URL-REGEX,^https://(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com/(?:weapi|api)/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info),UnblockNeteaseMusic
+URL-REGEX,^https://(?:(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface(?:3)?\.music\.163\.com\.163jiasu\.com)/weapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
 
 
 # ==========================================
-# 163jiasu.com
-# WebAPI / API
+# API
+#
+# hook.js:
+# /api/xxx
+#     ↓
+# netease.path = url.path
+#
+# 然后移除末尾 /数字
 # ==========================================
 
-URL-REGEX,^https://interface\.music\.163\.com\.163jiasu\.com/(?:weapi|api)/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info),UnblockNeteaseMusic
-
-URL-REGEX,^https://interface3\.music\.163\.com\.163jiasu\.com/(?:weapi|api)/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info),UnblockNeteaseMusic
+URL-REGEX,^https://(?:(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface(?:3)?\.music\.163\.com\.163jiasu\.com)/api/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
 
 
 # ==========================================
 # EAPI
 #
-# hook.js 会先解密 /eapi/ 请求，
-# 再从请求体取得真正的 netease.path
+# hook.js:
+# /eapi/xxx
+#     ↓
+# EAPI 解密 POST Body
+#     ↓
+# data[0] = netease.path
+#     ↓
+# 去掉末尾 /数字
+#     ↓
+# hook.target.path.has(netease.path)
+#
+# URL 层面因此匹配与 target.path 对应的
+# EAPI endpoint，而不是笼统匹配 /eapi/
 # ==========================================
 
-URL-REGEX,^https://(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com/eapi/,UnblockNeteaseMusic
+URL-REGEX,^https://(?:(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface(?:3)?\.music\.163\.com\.163jiasu\.com)/eapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
 
-URL-REGEX,^https://interface\.music\.163\.com\.163jiasu\.com/eapi/,UnblockNeteaseMusic
 
-URL-REGEX,^https://interface3\.music\.163\.com\.163jiasu\.com/eapi/,UnblockNeteaseMusic
+# ==========================================
+# EAPI Batch
+#
+# hook.target.path:
+# /batch
+# /api/batch
+#
+# EAPI 的 URL endpoint 对应可能为：
+# /eapi/batch
+# /eapi/api/batch
+# ==========================================
+
+URL-REGEX,^https://(?:(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface(?:3)?\.music\.163\.com\.163jiasu\.com)/eapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
+
+
+# ==========================================
+# Batch WebAPI / API
+#
+# hook.target.path:
+# /batch
+# /api/batch
+# ==========================================
+
+URL-REGEX,^https://(?:(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface(?:3)?\.music\.163\.com\.163jiasu\.com)/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
 
 
 # ==========================================
 # LinuxAPI
+#
+# hook.js 明确把：
+# /api/linux/forward
+# 作为 linuxapi 加密入口处理
+#
+# 它不属于 45 个 target.path，
+# 但属于 hook.js 明确处理的入口
 # ==========================================
 
-URL-REGEX,^https://(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com/api/linux/forward,UnblockNeteaseMusic
-
-URL-REGEX,^https://interface\.music\.163\.com\.163jiasu\.com/api/linux/forward,UnblockNeteaseMusic
-
-URL-REGEX,^https://interface3\.music\.163\.com\.163jiasu\.com/api/linux/forward,UnblockNeteaseMusic
-
-
-# ==========================================
-# Batch
-# ==========================================
-
-URL-REGEX,^https://(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com/batch,UnblockNeteaseMusic
-
-URL-REGEX,^https://(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com/api/batch,UnblockNeteaseMusic
-
-URL-REGEX,^https://interface\.music\.163\.com\.163jiasu\.com/(?:batch|api/batch),UnblockNeteaseMusic
-
-URL-REGEX,^https://interface3\.music\.163\.com\.163jiasu\.com/(?:batch|api/batch),UnblockNeteaseMusic
+URL-REGEX,^https://(?:(?:music|interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface(?:3)?\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$,UnblockNeteaseMusic
 
 
 # ==========================================
 # Package
-# hook.js: req.url.includes('package')
+#
+# hook.js:
+# req.url.includes('package')
+#
+# 实际生成格式：
+#
+# /package/<Base64(song.url)>/<id>.<type>
+#
+# tryMatch() 中：
+# global.endpoint + /package/...
 # ==========================================
 
-URL-REGEX,^https?://music\.163\.com/package/[^/]+/[^/]+\.\w+$,UnblockNeteaseMusic
+URL-REGEX,^https://music\.163\.com/package/[^/?#]+/[^/?#]+\.[A-Za-z0-9]+(?:\?.*)?$,UnblockNeteaseMusic
