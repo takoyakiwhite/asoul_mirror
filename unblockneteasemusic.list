@@ -19,7 +19,7 @@
 # 同时兼容 hook.js 会移除的末尾 /数字
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/weapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/weapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
@@ -33,7 +33,7 @@ URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|ap
 # 然后移除末尾 /数字
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
@@ -53,7 +53,7 @@ URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|ap
 # URL 层面精确对应 45 个 target path
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
@@ -68,7 +68,7 @@ URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|ap
 # /eapi/api/batch
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
@@ -79,7 +79,7 @@ URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|ap
 # /api/batch
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/(?:batch|api/batch|weapi/batch)(?:/\d*)?(?:\?.*)?$,UnblockNeteaseMusic
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/(?:batch|api/batch|weapi/batch)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
@@ -92,8 +92,7 @@ URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|ap
 # 不属于 45 个 hook.target.path
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$,UnblockNeteaseMusic
-
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$
 
 # ==========================================
 # Package
@@ -109,4 +108,4 @@ URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|ap
 # hook.js 本身只检查 URL 是否包含 package。
 # ==========================================
 
-URL-REGEX,^https?://[^/]+/package/[^/?#]+/[^/?#]+\.[A-Za-z0-9]+(?:\?.*)?$,UnblockNeteaseMusic
+URL-REGEX,^https://music\.163\.com/package/[^/]+/[^/]+\.(?:mp3|flac)(?:\?.*)?$
