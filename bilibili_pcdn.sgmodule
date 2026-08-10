@@ -1,5 +1,5 @@
 #!name=B站去P2P CDN
-#!desc=屏蔽B站P2P CDN
+#!desc=屏蔽B站P2P CDN并无感重定向到官方CDN
 
 [Rule]
 DOMAIN-SUFFIX,pcdn.biliapi.net,REJECT
@@ -8,42 +8,41 @@ DOMAIN-KEYWORD,ali-bj-pcdn,REJECT
 
 [URL Rewrite]
 # mcdn
-^(https?):\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::[0-9]+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9-]+\.mcdn\.bilivideo\.(?:cn|net)(?::[0-9]+)?\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # 域名:4480
-^(https?):\/\/[^\/]+:4480\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[^\/]+:4480\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # IP:8000/8082
-# ^(https?):\/\/(?:\d{1,3}\.){3}\d{1,3}(?::(?:8000|8082))?\/(?:v1\/resource\/)?upgcxcode\/(?!.*(?:\?|&)os=bcache(?:&|$))(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
-# ^(https?):\/\/(?:\d{1,3}\.){3}\d{1,3}(?::(?:8000|8082))?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+# ^(https?):\/\/(?:\d{1,3}\.){3}\d{1,3}:(?:8000|8082)\/(?:v1\/resource\/)?upgcxcode\/(?!.*(?:\?|&)os=bcache(?:&|$))(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
+# ^(https?):\/\/(?:\d{1,3}\.){3}\d{1,3}:(?:8000|8082)\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # upos-sz-mirror14b
-^(https?):\/\/upos-sz-mirror14b\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/upos-sz-mirror14b\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # 所有官方 upos-sz-302*
-^(https?):\/\/upos-sz-302[^.]*\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
-# ^(https?):\/\/(?!(?:upos-[^.]*mirroralib(?:[a-zA-Z0-9-]+)?|upos-[^.]*ov|upos-[^.]*bstar1)\.bilivideo\.(?:com|cn))(?:upos|cn)-[A-Za-z0-9.-]+\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/upos-sz-302[^.]*\.bilivideo\.(?:com|cn)(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # szbdyd
-^(https?):\/\/[a-zA-Z0-9.-]+\.szbdyd\.com(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9.-]+\.szbdyd\.com(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # mcdn + szbdyd
-^(https?):\/\/[a-zA-Z0-9.-]+\.mcdn\.bilivideo\.cn\.szbdyd\.com(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9.-]+\.mcdn\.bilivideo\.cn\.szbdyd\.com(?::\d+)?\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # mountaintoys
-^(https?):\/\/[a-zA-Z0-9-]+\.edge\.mountaintoys\.cn(?::(?:4483|9102))?\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9-]+\.edge\.mountaintoys\.cn(?::(?:4483|9102))?\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # nexusedgeio
-^(https?):\/\/[a-zA-Z0-9.-]+\.nexusedgeio\.com\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9.-]+\.nexusedgeio\.com\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # ahdohpiechei
-^(https?):\/\/[a-zA-Z0-9.-]+\.ahdohpiechei\.com\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9.-]+\.ahdohpiechei\.com\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # yirujs
-^(https?):\/\/[a-zA-Z0-9-]+\.yirujs\.com\/(?:v1\/resource\/)?upgcxcode\/(.+) $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 302
+^(https?):\/\/[a-zA-Z0-9-]+\.yirujs\.com\/(?:v1\/resource\/)?upgcxcode\/(.+)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2 header
 
 # 兼容 os=mcdn
-^(https?):\/\/(?!upos-[^.]*mirroralib[^.]*\.bilivideo\.(?:com|cn))[^\/]+\/(?:v\d+\/resource\/)?upgcxcode\/([^?]+)(\?(?:[^&]+&)*os=mcdn(?:&.*)?)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2$3 302
+^(https?):\/\/(?!upos-[^.]*mirroralib[^.]*\.bilivideo\.(?:com|cn))[^\/]+\/(?:v\d+\/resource\/)?upgcxcode\/([^?]+)(\?(?:[^&]+&)*os=mcdn(?:&.*)?)$ $1://upos-sz-mirroralib.bilivideo.com/upgcxcode/$2$3 header
 
 [MITM]
 hostname = %APPEND% *.bilivideo.com, *.bilivideo.cn, *.bilivideo.net, *.szbdyd.com, *.mountaintoys.cn, *.nexusedgeio.com, *.ahdohpiechei.com, *.yirujs.com
