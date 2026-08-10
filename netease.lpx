@@ -42,9 +42,11 @@ DOMAIN,ipv6.music.163.com,REJECT
 
 [Rewrite]
 
-^https:\/\/(m\d+\.music\.126\.net\/.+)$ http://$1 302
+^https:\/\/(m[0-9]+\.music\.126\.net\/.+\.(?:mp3|flac|m4a|aac)(?:\?.*)?)$ http://$1 302
 
-^https:\/\/([a-z0-9-]+-er\.kuwo\.cn\/.+)$ http://$1 302
+^https:\/\/((?:kw-er|bd-er)\.kuwo\.cn\/.+\.(?:mp3|flac|m4a|aac)(?:\?.*)?)$ http://$1 302
+
+^https:\/\/(fsandroid\.tx\.kugou\.com\/.+\.(?:mp3|flac|m4a|aac)(?:\?.*)?)$ http://$1 302
 
 [Script]
 
@@ -91,4 +93,4 @@ http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/vip
 http-request ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/(?:w|x)?eapi\/(?:music-vip-membership\/(?:client|front)\/vip\/info|vip-center-bff\/(?:card\/entry\/list|float\/data|quality\/auth\/info)|v1\/user\/info) script-path=https://raw.githubusercontent.com/takoyakiwhite/asoul_mirror/main/netease.js, timeout=20, tag=[网易云]会员信息, enable={Music163_VIP_Shared}, argument="[{Cookie},{MConfigInfo},{UserAgent},{ConfigURL},{ConfigUserAgent}]"
 
 [MITM]
-hostname = *.music.126.net, music.163.com, interface*.music.163.com, ipv4.music.163.com
+hostname = m*.music.126.net, kw-er.kuwo.cn, bd-er.kuwo.cn, fsandroid.tx.kugou.com, music.163.com, interface*.music.163.com, ipv4.music.163.com
