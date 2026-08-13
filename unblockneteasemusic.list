@@ -4,108 +4,127 @@
 # Based on hook.js
 #
 # hook.target.host : 8
-# hook.target.path : 45
+# hook.target.path : 46
 # ==========================================
 
 
 # ==========================================
 # WebAPI / weapi
 #
-# hook.js:
-# /weapi/xxx
-#   ↓
+# hook.js:328-340
+# /weapi/xxx (GET/POST, 无 method 限制)
+#   ↓ replace(/^\/weapi\//, '/api/')
 # /api/xxx
-#
-# 同时兼容 hook.js 会移除的末尾 /数字
+#   ↓ split('?').shift().replace(/\/\d*$/, '')
+# hook.target.path.has(netease.path)
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/weapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/weapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
-# API
+# API (明文, 走 weapi 分支 web:true)
 #
-# hook.js:
-# /api/xxx
-#   ↓
-# netease.path = url.path
-#
-# 然后移除末尾 /数字
+# hook.js:328-340
+# /api/xxx (GET/POST, 无 method 限制)
+#   ↓ replace(/^\/weapi\//, '/api/') (不匹配, 保持原样)
+#   ↓ split('?').shift().replace(/\/\d*$/, '')
+# hook.target.path.has(netease.path)
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
 # EAPI
 #
-# hook.js:
-# /eapi/*
-#   ↓
-# EAPI 解密 POST Body
-#   ↓
-# data[0] = netease.path
-#   ↓
-# 移除末尾 /数字
-#   ↓
+# hook.js:187,220,244-269
+# POST /eapi/xxx
+#   ↓ eapi.decrypt(body) → split('-36cd479b6b5-')
+# data[0] = /api/xxx = netease.path
+#   ↓ replace(/\/\d*$/, '')
 # hook.target.path.has(netease.path)
 #
-# URL 层面精确对应 45 个 target path
+# URL 层面: /eapi/ + (target.path 去掉 /api/ 前缀)
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
+
+
+# ==========================================
+# XEAPI (新增, 原规则缺失)
+#
+# hook.js:188,213-219
+# POST /xeapi/xxx
+#   ↓ url.path.replace(/^\/xeapi\//, '/api/')
+# /api/xxx = netease.path
+#   ↓ replace(/\/\d*$/, '')  (hook.js:285)
+# hook.target.path.has(netease.path)
+#
+# 请求体不可解密 (X25519 会话密钥), 仅解密/修改/重加密响应
+# 响应解密: netease.crypto === 'xeapi' → crypto.xeapi.decrypt (eapiKey + gzip)
+# 响应重加密: netease.e_r === true → crypto.eapi.encrypt
+#
+# URL 层面: /xeapi/ + (target.path 去掉 /api/ 前缀)
+# ==========================================
+
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/xeapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
 # EAPI / Batch
 #
-# hook.target.path:
-# /batch
-# /api/batch
-#
-# EAPI 请求入口可能对应：
-# /eapi/batch
-# /eapi/api/batch
+# hook.target.path: /batch, /api/batch
+# eapi 解密后 data[0] 可能是 /batch 或 /api/batch
+# URL 入口: /eapi/batch 或 /eapi/api/batch
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$# ==========================================
+# XEAPI / Batch (新增)
+#
+# hook.target.path: /batch, /api/batch
+# xeapi replace 后 netease.path = /api/batch 或 /batch
+# URL 入口: /xeapi/batch 或 /xeapi/api/batch
+# ==========================================
+
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/xeapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$
 
 
 # ==========================================
 # Batch / WebAPI / API
 #
-# hook.target.path:
-# /batch
-# /api/batch
+# hook.target.path: /batch, /api/batch
+# hook.js:328-340 weapi 分支条件: startsWith('/weapi/') || startsWith('/api/')
+#   /weapi/batch → /api/batch ✓
+#   /api/batch  → /api/batch ✓
+#   /batch      → 不匹配 (不以 /weapi/ 或 /api/ 开头), 项目不处理, 已移除
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/(?:batch|api/batch|weapi/batch)(?:/\d*)?(?:\?.*)?$
-
-
-# ==========================================
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/(?:api/batch|weapi/batch)(?:/\d*)?(?:\?.*)?$# ==========================================
 # LinuxAPI
 #
-# hook.js 明确处理：
-# /api/linux/forward
+# hook.js:190,211-243
+# POST /api/linux/forward
+#   ↓ linuxapi.decrypt(body) → JSON.parse → parse(data.url).path
+# netease.path = 真实路径 (如 /api/song/enhance/player/url/v1)
+#   ↓ replace(/\/\d*$/, '')
+# hook.target.path.has(netease.path)
 #
-# 这是独立的 linuxapi 加密入口，
-# 不属于 45 个 hook.target.path
+# URL 层面固定 /api/linux/forward, 真实 path 在加密体内, 无法在 URL 层面精确匹配
 # ==========================================
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$
-
-# ==========================================
+URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$# ==========================================
 # Package
 #
-# hook.js:
-# req.url.includes('package')
+# hook.js:341-357
+# req.url.includes('package') — 不限制 host
+# 实际格式: /package/<Base64(song.url)>/<id>.<type>
 #
-# 实际格式：
-# /package/<Base64(song.url)>/<id>.<type>
-#
-# 注意：
-# package 的 hostname 不是 hook.target.host 的限制条件。
-# hook.js 本身只检查 URL 是否包含 package。
+# 注意:
+# 1. host 是 global.endpoint (用户配置的 -e 域名), 不是 music.163.com
+#    将下面的 music.163.com 替换为你实际配置的 endpoint 域名
+# 2. 扩展名不限于 mp3/flac, 用 [^/?]+ 匹配任意类型
+# 3. 若未配置 endpoint, 不会生成 package URL, 此规则可忽略
 # ==========================================
 
-URL-REGEX,^https://music\.163\.com/package/[^/]+/[^/]+\.(?:mp3|flac)(?:\?.*)?$
+URL-REGEX,^https://music\.163\.com/package/[^/]+/[^/]+\.[^/?]+(?:\?.*)?$
