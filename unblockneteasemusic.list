@@ -1,130 +1,59 @@
 # ==========================================
-# UnblockNeteaseMusic
-# Surge Rules
-# Based on hook.js
-#
-# hook.target.host : 8
-# hook.target.path : 46
+# 网易云音乐 Surge/Loon 规则集成配置
+# 包含: UnblockNeteaseMusic (UBNM) 核心解锁、VIP 破解、界面精简与去广告
+# 兼容: xeapi, eapi, weapi, api 以及各类分发域名
 # ==========================================
 
+# ==========================================
+# 第一类：UnblockNeteaseMusic (UBNM) 核心解锁规则
+# 涉及网易云的歌单、歌曲详情、音源替换等核心 API
+# ==========================================
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist(?:/songs)?|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url(?:/v1)?|song/enhance/download/url(?:/v1)?|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/(?:promote|theme|animationList|all|detail)|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
 
 # ==========================================
-# WebAPI / weapi
-#
-# hook.js:328-340
-# /weapi/xxx (GET/POST, 无 method 限制)
-#   ↓ replace(/^\/weapi\//, '/api/')
-# /api/xxx
-#   ↓ split('?').shift().replace(/\/\d*$/, '')
-# hook.target.path.has(netease.path)
+# 第二类：UBNM 特殊请求规则（Batch / Linux / Package）
+# 涉及批处理请求、Linux API 转发和下载/缓存功能
 # ==========================================
+# UBNM: Batch 批处理接口
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/weapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
+# UBNM: Linux API (固定走 /api/linux/forward)
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$
 
-
-# ==========================================
-# API (明文, 走 weapi 分支 web:true)
-#
-# hook.js:328-340
-# /api/xxx (GET/POST, 无 method 限制)
-#   ↓ replace(/^\/weapi\//, '/api/') (不匹配, 保持原样)
-#   ↓ split('?').shift().replace(/\/\d*$/, '')
-# hook.target.path.has(netease.path)
-# ==========================================
-
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
-
+# UBNM: Package (音源下载缓存, 不带 api 前缀, host为用户自定义endpoint)
+URL-REGEX,^https?://(?:[^/]+\.)?music\.163\.com/package/[^/]+/[^/]+\.[^/?]+(?:\?.*)?$
 
 # ==========================================
-# EAPI
-#
-# hook.js:187,220,244-269
-# POST /eapi/xxx
-#   ↓ eapi.decrypt(body) → split('-36cd479b6b5-')
-# data[0] = /api/xxx = netease.path
-#   ↓ replace(/\/\d*$/, '')
-# hook.target.path.has(netease.path)
-#
-# URL 层面: /eapi/ + (target.path 去掉 /api/ 前缀)
+# 第三类：网易云 VIP 破解/辅助脚本类
+# 用于解锁会员歌曲、VIP 皮肤、会员身份展示等
 # ==========================================
+# 播放会员歌曲相关
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:v1/artist/top/song|v3/discovery/recommend/songs|v3/song/detail|song/(?:chorus|enhance/|play/|type/detail/get))(?:\?.*)?$
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
+# 播放器会员皮肤
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/playermode/(?:\?.*)?$
 
+# 搜索结果会员歌曲
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/search/(?:complex/page|complex/rec/song/get|song/list/page)(?:\?.*)?$
 
-# ==========================================
-# XEAPI (新增, 原规则缺失)
-#
-# hook.js:188,213-219
-# POST /xeapi/xxx
-#   ↓ url.path.replace(/^\/xeapi\//, '/api/')
-# /api/xxx = netease.path
-#   ↓ replace(/\/\d*$/, '')  (hook.js:285)
-# hook.target.path.has(netease.path)
-#
-# 请求体不可解密 (X25519 会话密钥), 仅解密/修改/重加密响应
-# 响应解密: netease.crypto === 'xeapi' → crypto.xeapi.decrypt (eapiKey + gzip)
-# 响应重加密: netease.e_r === true → crypto.eapi.encrypt
-#
-# URL 层面: /xeapi/ + (target.path 去掉 /api/ 前缀)
-# ==========================================
+# 侧边栏会员等级 & 会员认证
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:vipnewcenter/app/resource/newaccountpage|vipauth/app/auth/(?:soundquality/)?query)(?:\?.*)?$
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/xeapi/(?:v3/playlist/detail|v3/song/detail|v6/playlist/detail|album/play|artist/privilege|album/privilege|v1/artist|v1/artist/songs|v2/artist/songs|artist/top/song|v1/album|album/v3/detail|playlist/privilege|song/enhance/player/url|song/enhance/player/url/v1|song/enhance/download/url|song/enhance/download/url/v1|song/enhance/privilege|ad|listen/together/privilege/get|playmode/intelligence/list|v1/search/get|v1/search/song/get|search/complex/get|search/complex/page|search/pc/complex/get|search/pc/complex/page|search/song/list/page|search/song/page|cloudsearch/pc|v1/playlist/manipulate/tracks|song/like|radio/like|v1/play/record|playlist/v4/detail|v1/radio/get|v1/discovery/recommend/songs|usertool/sound/mobile/promote|usertool/sound/mobile/theme|usertool/sound/mobile/animationList|usertool/sound/mobile/all|usertool/sound/mobile/detail|vipauth/app/auth/query|music-vip-membership/client/vip/info)(?:/\d*)?(?:\?.*)?$
-
+# 歌单列表会员认证
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:homepage/|v6/)?playlist/(?!delete|subscribe|unsubscribe).*(?:\?.*)?$
 
 # ==========================================
-# EAPI / Batch
-#
-# hook.target.path: /batch, /api/batch
-# eapi 解密后 data[0] 可能是 /batch 或 /api/batch
-# URL 入口: /eapi/batch 或 /eapi/api/batch
+# 第四类：网易云 界面精简与去广告类
+# 屏蔽主页广告、评论区热推、底部 Tab 多余项等
 # ==========================================
+# 评论区去广告 (包含 batch 和 comment/floor)
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:batch|v2/resource/comment/floor/get)(?:\?.*)?$
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/eapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$# ==========================================
-# XEAPI / Batch (新增)
-#
-# hook.target.path: /batch, /api/batch
-# xeapi replace 后 netease.path = /api/batch 或 /batch
-# URL 入口: /xeapi/batch 或 /xeapi/api/batch
-# ==========================================
+# 推荐、主页精简
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:homepage/block/page|link/page/rcmd/(?:block/resource/multi/refresh|resource/show))(?:\?.*)?$
 
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/xeapi/(?:batch|api/batch)(?:/\d*)?(?:\?.*)?$
+# 底部Tab、发现页、我的页面精简
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/(?:link/home/framework/tab|link/page/discovery/resource/show|link/position/show/resource)(?:\?.*)?$
 
-
-# ==========================================
-# Batch / WebAPI / API
-#
-# hook.target.path: /batch, /api/batch
-# hook.js:328-340 weapi 分支条件: startsWith('/weapi/') || startsWith('/api/')
-#   /weapi/batch → /api/batch ✓
-#   /api/batch  → /api/batch ✓
-#   /batch      → 不匹配 (不以 /weapi/ 或 /api/ 开头), 项目不处理, 已移除
-# ==========================================
-
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/(?:api/batch|weapi/batch)(?:/\d*)?(?:\?.*)?$# ==========================================
-# LinuxAPI
-#
-# hook.js:190,211-243
-# POST /api/linux/forward
-#   ↓ linuxapi.decrypt(body) → JSON.parse → parse(data.url).path
-# netease.path = 真实路径 (如 /api/song/enhance/player/url/v1)
-#   ↓ replace(/\/\d*$/, '')
-# hook.target.path.has(netease.path)
-#
-# URL 层面固定 /api/linux/forward, 真实 path 在加密体内, 无法在 URL 层面精确匹配
-# ==========================================
-
-URL-REGEX,^https://(?:music\.163\.com|(?:interface|interface3|interfacepc|apm|apm3)\.music\.163\.com|interface\.music\.163\.com\.163jiasu\.com|interface3\.music\.163\.com\.163jiasu\.com)/api/linux/forward(?:\?.*)?$# ==========================================
-# Package
-#
-# hook.js:341-357
-# req.url.includes('package') — 不限制 host
-# 实际格式: /package/<Base64(song.url)>/<id>.<type>
-#
-# 注意:
-# 1. host 是 global.endpoint (用户配置的 -e 域名), 不是 music.163.com
-#    将下面的 music.163.com 替换为你实际配置的 endpoint 域名
-# 2. 扩展名不限于 mp3/flac, 用 [^/?]+ 匹配任意类型
-# 3. 若未配置 endpoint, 不会生成 package URL, 此规则可忽略
-# ==========================================
-
-URL-REGEX,^https://music\.163\.com/package/[^/]+/[^/]+\.[^/?]+(?:\?.*)?$
+# 显示未关注你的人
+URL-REGEX,^https?://(?:(?:ipv4|interface\d?|interfacepc|apm\d?)\.music\.163\.com|music\.163\.com|interface\d?\.music\.163\.com\.163jiasu\.com)/(?:x?eapi|weapi|api)/user/follow/users/mixed/get(?:\?.*)?$
